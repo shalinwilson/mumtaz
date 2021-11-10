@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tax_payment_adjustments_wizard" model="ir.ui.view">
+            <field name="name">tax.payment.adjustment.wizard.form</field>
+            <field name="model">tax.payment.adjustment.wizard</field>
+            <field name="arch" type="xml">
+            <form>
+                <h1>
+                    <field name="name" class="oe_inline" placeholder="Reason..." required="1"/>
+                </h1>
+                <group>
+                    <group>
+                        <field name="amount" required="1"/>
+                    </group>
+                    <group>
+                        <field name="vat_type" required="1"/>
+                        <field name="adjustment_type" attrs="{'invisible': [('vat_type', '!=', 'adjustment')], 'required': [('vat_type', '=', 'adjustment')]}"/>
+                    </group>
+                    <group string="Accounts">
+                        <field name="debit_account_id" options="{'no_create': True}" attrs="{'invisible': [('vat_type', '!=', 'adjustment')], 'required': [('vat_type', '=', 'adjustment')]}"/>
+<!--                        <field name="debit_account_id" string="Tax Account" options="{'no_create': True}" attrs="{'invisible': [('vat_type', 'in', ('payment', 'adjustment'))], 'required': [('vat_type', '=', 'refund')]}"/>-->
+                        <field name="credit_account_id" options="{'no_create': True}" attrs="{'invisible': [('vat_type', '!=', 'adjustment')], 'required': [('vat_type', '=', 'adjustment')]}"/>
+                        <field name="credit_account_id" string="Tax Account" options="{'no_create': True}" attrs="{'invisible': [('vat_type', 'in', ('adjustment'))], 'required': [('vat_type', 'in', ('refund', 'payment'))]}"/>
+                    </group>
+                    <group string="Options">
+                        <field name="currency_id" invisible="1"/>
+                        <field name="journal_id" required="1"/>
+                        <field name="date" required="1"/>
+                        <field name="company_id" invisible="1"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="create_move" string="Create and post move" type="object" default_focus="1" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-secondary" special="cancel" />
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_tax_payment_adjustments" model="ir.actions.act_window">
+            <field name="name">Tax Payment/Adjustments</field>
+            <field name="res_model">tax.payment.adjustment.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="action_tax_payment_adjustments" id="menu_tax_payment_adjustment" parent="account.menu_finance_entries_actions" sequence="45" groups="base.group_user" />
+
+    </data>
+</odoo>

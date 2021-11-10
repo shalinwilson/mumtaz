@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="popup_dynamic_combo">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y" style="width: 85%; min-height: 600px">
+                <div class="card">
+                    <p class="title"><t t-esc=" widget.options.title || 'Alert' " /></p>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped-1">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped-2">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <span class="card-issue"/>
+                <div class="form-footer text-center">
+                    <div class="btn btn-success pull-right confirm">
+                        Confirm <i class='fa fa-keyboard'/> (Enter)
+                    </div>
+                    <div class="btn btn-danger pull-left cancel">
+                        Close <i class='fa fa-keyboard'/> (ESC)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="dynamic_combo_items">
+        <t t-foreach="products" t-as="product">
+            <t t-call="dynamic_combo_item"/>
+        </t>
+    </t>
+
+    <t t-name="dynamic_combo_items_not_found">
+        <p class="body">Combo Items not found</p>
+    </t>
+
+    <t t-name="dynamic_categories_combo">
+        <t t-foreach="pos_categories" t-as="category">
+            <span class='popup_category_item category-simple-button js-category-switch' t-att-data-category-id="category.id" >
+                <t t-esc="category.name"/>
+            </span>
+        </t>
+    </t>
+
+    <t t-name="dynamic_combo_item">
+        <article class="product" t-att-data-product-id="product.id" tabindex="0" t-attf-aria-labelledby="article_product_#{product.id}">
+            <span class="btn btn-danger minus">
+                <i class="fa fa-minus"/>
+            </span>
+            <span class="btn btn-danger trash">
+                <i class="fa fa-trash"/>
+            </span>
+            <span class="btn btn-success plus">
+                <i class="fa fa-plus"/>
+            </span>
+            <div class="combo-item-product-img-big">
+                <img class='combo-item-product_list_image' t-att-src='widget.get_product_image_url(product)'/>
+            </div>
+            <span class="combo-item-price-tag">
+                <t t-esc="widget.format_currency(widget.format_currency(product.combo_price), 'Product Price')"/>
+            </span>
+            <div class="product-name">
+                <t t-esc="product.name"/>
+            </div>
+            <div class="combo-item-cart_qty">
+                <t t-if="product.quantity">
+                    <t t-esc="product.quantity"/>
+                </t>
+                <t t-if="!product.quantity">
+                    0
+                </t>
+            </div>
+        </article>
+    </t>
+
+</templates>

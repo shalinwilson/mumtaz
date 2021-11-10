@@ -1,0 +1,15 @@
+[1] Installed any our module and use
+[2] Free ticket support about POS Module
+[3] Access to our GitHub
+[4] Update new version directly our Github
+[5] When we release new app for POS, you have it to
+[6] Support install PosBox, Scanner, Printer (Odoo13 not support PosBox but we have solution support POSBOX for Odoo13)
+[7] 1 Year support bugs, issues and guide video all features (purchase from odoo Store only 2 months)
+[8] Free Email Support
+[9] Free Skype Support
+[10] Free WhatApp Support
+[11] Allow hosting our modules on your SaaS Server
+[12] Allow Resale our module to any clients you wanted on your Country. Not allow republic, resale on Store Odoo.
+[13] Free Solution POS Sale Offline Mode (300~500 Orders each second time). No need push orders to Odoo Server realtime, don't need Browse Cache Store Orders. All Orders will store on Local Network and Internet Back, all Orders automatic push (sync) Odoo Backend Online.
+[14] Free Solution Printer Network Lan (Only one POSBox for multi Printer)
+[15] Free Solution KitChen/Bar Screen

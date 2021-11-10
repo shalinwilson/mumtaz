@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="product_invoice_link_inherited_product_view" model="ir.ui.view">
+		<field name="name">product.product.varient.inherited.form</field>
+		<field name="model">product.product</field>
+		<field name="inherit_id" ref="product.product_normal_form_view" />
+		<field name="arch" type="xml">
+			<xpath expr="//div[@name='button_box']" position="inside">
+				<button class="oe_stat_button" name="invoice_qty_button" type="object" icon="fa-shopping-cart" attrs="{'invisible': [('count_invoice_qty', '=', 0)]}">
+					<field name="count_invoice_qty" widget="statinfo" string="Invoice Qty"/>
+				</button>
+				<button class="oe_stat_button" name="invoice_amount_button" type="object" icon="fa-dollar" attrs="{'invisible': [('count_invoice_amount', '=', 0)]}">
+					<field name="count_invoice_amount" widget="statinfo" string="Invoice Amount"/>
+				</button>
+				<button class="oe_stat_button" name="incoming_invoice_qty_button" type="object" icon="fa-cart-arrow-down" attrs="{'invisible': [('count_incoming_invoice_qty', '=', 0)]}">
+					<field name="count_incoming_invoice_qty" widget="statinfo" string="Incoming Invoice Qty"/>
+				</button>
+				<button class="oe_stat_button" name="incoming_invoice_amount_button" type="object" icon="fa-dollar" attrs="{'invisible': [('count_incoming_invoice_amount', '=', 0)]}">
+					<field name="count_incoming_invoice_amount" widget="statinfo" string="Incoming Invoice Amount"/>
+				</button>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="account_move_line_tree_view" model="ir.ui.view">
+		<field name="name">account.move.line.inherited.tree</field>
+		<field name="model">account.move.line</field>
+		<field name="inherit_id" ref="account.view_move_line_tree_grouped" />
+		<field name="arch" type="xml">
+			<xpath expr="//tree/field[@name='ref']" position="after">
+				<field name="quantity"/>
+			</xpath>
+		</field>
+	</record>
+</odoo>

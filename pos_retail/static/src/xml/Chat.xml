@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<!--    <t t-extend="Chrome">-->
+<!--        <t t-jquery="div.pos-rightheader" t-operation="append">-->
+<!--            <div class="oe_status pos_chat">-->
+<!--                <a title="Chat Messages" href="javascript:void(0)">-->
+<!--                    <i class="material-icons pos-message" aria-hidden="false">message</i>-->
+<!--                    <span class="o_notification_counter oe_green"/>-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </t>-->
+<!--    </t>-->
+
+    <t t-name="ChatWidget">
+        <div class="oe_status pos_chat">
+            <a title="Conversations" href="javascript:void(0)">
+                <i class="material-icons pos-message" aria-hidden="false">message</i>
+                <span class="o_notification_counter oe_green"/>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="MessageWidget">
+        <div class="o_mail_systray_item">
+            <div
+                class="o_mail_systray_dropdown message-box" role="menu">
+                <div class="message">
+                    <t t-if="widget.isMobile()">
+                        <div class="o_mail_systray_mobile_header title">
+                            <button type="button" class="btn btn-secondary o_new_message"> New message </button>
+                        </div>
+                    </t>
+                    <div t-if="!widget.isMobile()"
+                         class="o_mail_systray_dropdown_top title">
+                        <div>
+                            <button type="button" class="btn btn-link o_filter_button active" role="tab"> All </button>
+                            <button type="button" class="btn btn-link o_filter_button" data-filter='chat' role="tab"> Chat </button>
+                            <button type="button" class="btn btn-link o_filter_button" data-filter='channels' role="tab"> Channels </button>
+                        </div>
+                        <button type="button" class="btn btn-link o_new_message"> New message </button>
+                    </div>
+                    <div class="o_mail_systray_dropdown_items"/>
+                    <t t-if="widget.isMobile()">
+                        <div class="o_mail_mobile_tabs title">
+                            <div class="o_mail_mobile_tab o_filter_button active" role="tab">
+                                <span class="fa fa-envelope"/>
+                                <span class="o_tab_title">All</span>
+                            </div>
+                            <div class="o_mail_mobile_tab o_filter_button" data-filter='chat' role="tab">
+                                <span class="fa fa-user"/>
+                                <span class="o_tab_title">Chat</span>
+                            </div>
+                            <div class="o_mail_mobile_tab o_filter_button" data-filter='channels' role="tab">
+                                <span class="fa fa-users"/>
+                                <span class="o_tab_title">Channels</span>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-extend="mail.discuss.Sidebar">
+        <t t-jquery="div:first > div:first" t-operation="before">
+            <div class="o_mail_chat_title_main back_to_pos hide">
+                <a href="#" class="back_to_pos">
+                    <i class="fa fa-arrow-left"/>
+                    Back TO POS Screen
+                </a>
+            </div>
+            <hr class="mb8"/>
+        </t>
+    </t>
+
+</templates>

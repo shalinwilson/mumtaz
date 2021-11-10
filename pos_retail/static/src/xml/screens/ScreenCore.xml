@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="OrderSelectorWidget">
+        <t t-jquery="div[class*='order-selector']" t-operation="replace">
+            <div class="order-selector">
+                <span class="order-button square neworder-button" title="Add New Order, Keyboard Event: n">
+                    <i class='fa fa-plus' role="img" aria-label="New order" title="New order"/>
+                </span>
+                <span class="order-button square deleteorder-button" title="Remove Current Order, Keyboard Event: r">
+                    <i class='fa fa-minus' role="img" aria-label="Delete order" title="Delete order"/>
+                </span>
+                <span class="orders touch-scrollable">
+                    <t t-foreach="widget.pos.get_order_list()" t-as="order">
+                        <t t-set='selected_order' t-value='widget.pos.get_order'/>
+                        <t t-if='order === widget.pos.get_order()'>
+                            <span class="order-button select-order selected" t-att-data-uid="order.uid">
+                                <span class="keyboard-shortcut">
+                                    <i class="fa fa-keyboard"></i>
+                                    <i class="fa fa-angle-left"></i> or
+                                    <i class="fa fa-angle-right"></i>
+                                </span>
+                                <span class='order-sequence'>
+                                    <t t-esc='order.sequence_number' />
+                                </span>
+                                <t t-esc="moment(order.creation_date).format('hh:mm')"/>
+                                <t t-if="order.origin">
+                                    <span class="seller_name">
+                                        <t t-esc="order['origin']"/>
+                                    </span>
+                                </t>
+                                <t t-if="order.seller">
+                                    <span class="seller_name">
+                                        <t t-esc="order['seller']['name']"/>
+                                    </span>
+                                </t>
+                            </span>
+                        </t>
+                        <t t-if='order !== widget.pos.get_order()'>
+                            <span class="order-button select-order" t-att-data-uid="order.uid">
+                                <span class='order-sequence'>
+                                    <t t-esc='order.sequence_number' />
+                                </span>
+                                <t t-esc="moment(order.creation_date).format('hh:mm')"/>
+                                <t t-if="order.origin">
+                                    <span class="seller_name">
+                                        <t t-esc="order.origin"/>
+                                    </span>
+                                </t>
+                                <t t-if="order.seller">
+                                    <span class="seller_name">
+                                        <t t-esc="order['seller']['name']"/>
+                                    </span>
+                                </t>
+                            </span>
+                        </t>
+                    </t>
+                </span>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="customer_screen">
+        <div class="swiper-container gallery-top">
+            <div class="swiper-wrapper">
+                <t t-foreach="images" t-as="image">
+                    <div class="swiper-slide" t-att-style="image.image_url">
+                        <t t-if="image.name">
+                            <li><t t-esc="image.name"/></li>
+                        </t>
+                        <t t-if="image.description">
+                            <li><t t-esc="image.description"/></li>
+                        </t>
+                    </div>
+                </t>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-scrollbar"></div>
+        </div>
+        <div class="swiper-container gallery-thumbs">
+            <div class="swiper-wrapper">
+                <t t-foreach="images" t-as="image">
+                    <div class="swiper-slide" t-att-style="image.image_url">
+                        <li><t t-esc="image.name"/></li>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="UserCardHtml">
+        <div class="pos-receipt">
+            <t t-if='pos.company_logo_base64'>
+                <img class="user-card-receipt-logo" t-att-src='pos.company_logo_base64' alt="Logo"/>
+                <br/>
+            </t>
+            <t t-if='!pos.company_logo_base64' class="pos-receipt-center-align">
+                <h1 t-esc='company.name' />
+                <br/>
+            </t>
+            <br/>
+            <t t-if='cashier.image'>
+                <img class="pos-receipt-logo" t-att-src='cashier.image' alt="Logo" style="width: 200px;
+                    height: 200px;
+                    border-radius: 55%;
+                    margin-top: 25px;
+                    float: none;"/>
+                <br/>
+            </t>
+            <div class="user-card-receipt-contact">
+                <t t-if='company.contact_address'>
+                    <div><t t-esc='company.contact_address' /></div>
+                </t>
+                <t t-if='company.phone'>
+                    <div>Tel:<t t-esc='company.phone' /></div>
+                </t>
+                <t t-if='company.vat'>
+                    <div>VAT:<t t-esc='company.vat' /></div>
+                </t>
+                <t t-if='company.email'>
+                    <div>Email: <t t-esc='company.email' /></div>
+                </t>
+                <t t-if='company.website'>
+                    <div>Website: <t t-esc='company.website' /></div>
+                </t>
+                <t t-if='cashier'>
+                    <div class='cashier'>
+                        <div>--------------------------------</div>
+                        <div><h1><t t-esc='cashier.name' /></h1></div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+
+
+</templates>

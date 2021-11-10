@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="ReceiptScreenWidget">
+        <t t-jquery="span[class*='next']" t-operation="replace">
+            <span class='button next'>
+                Next Order
+                <span class="keyboard-shortcut">
+                    <i class="fa fa-keyboard"/>
+                    (Enter)
+                </span>
+            </span>
+        </t>
+        <t t-jquery="div[class*='print']" t-operation="replace">
+            <div class="button print">
+                <i class='fa fa-print'></i>
+                Print Receipt
+                <span class="keyboard-shortcut">
+                    <i class="fa fa-keyboard"/>
+                    (P)
+                </span>
+            </div>
+        </t>
+        <t t-jquery="div[class*='pos-receipt-container']" t-operation="after">
+            <div class="email-receipt-container">
+                <div class="card-content">
+                    <h4 class="card-title">Are you want sending Email with Receipt to Customer</h4>
+                    <div class="row">
+                        <span>Email <t t-esc="this.email"/></span>
+                        <input class="form-control email" name="email">
+                            <t t-esc="widget.email"/>
+                        </input>
+                    </div>
+                    <div class="row">
+                        <span>Note </span>
+                        <textarea class="form-control body" name="body"></textarea>
+                    </div>
+                    <div class="row" style="width: 50%">
+                        <div class="btn btn-success pull-right send_email">
+                            Send <i class="material-icons">email</i>
+                        </div>
+                    </div>
+                    <span class="email_result" style="color:blue"></span>
+                    <span class="email_issue" style="color: red"></span>
+                </div>
+            </div>
+        </t>
+    </t>
+
+</templates>

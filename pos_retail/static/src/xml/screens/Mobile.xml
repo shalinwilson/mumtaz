@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="MobileWidgetHeader">
+        <div class="oe_status oe_red" title="Mobile On">
+            <i class="material-icons">mobile_off</i>
+        </div>
+    </t>
+
+    <t t-name="FullScreenWidgetHeader">
+        <div class="oe_status oe_green" title="Mobile Off">
+            <i class="material-icons">mobile_friendly</i>
+        </div>
+    </t>
+
+</templates>

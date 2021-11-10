@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="pos_ui_tree" model="ir.ui.view">
+            <field name="name">pos.ui.tree</field>
+            <field name="model">pos.ui</field>
+            <field name="arch" type="xml">
+                <tree string="Receipt Design">
+                    <field name="config_id"/>
+                    <field name="tag"/>
+                    <field name="top"/>
+                    <field name="left"/>
+                    <field name="width"/>
+                    <field name="height"/>
+                    <field name="fontsize"/>
+                    <field name="lineheight"/>
+                    <field name="background" widget="color"/>
+                    <field name="color" widget="color"/>
+                    <field name="invisible" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pos_ui_form" model="ir.ui.view">
+            <field name="name">pos.ui.form</field>
+            <field name="model">pos.ui</field>
+            <field name="arch" type="xml">
+                <form string="Receipt Design">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="config_id"/>
+                                <field name="tag"/>
+                                <field name="fontsize"/>
+                                <field name="lineheight"/>
+                                <field name="fontweight"/>
+                                <field name="padding"/>
+                                <field name="margin"/>
+                                <field name="borderradius"/>
+                                <field name="textalign"/>
+                                <field name="invisible"/>
+                            </group>
+                            <group>
+                                <field name="top"/>
+                                <field name="left"/>
+                                <field name="width"/>
+                                <field name="height"/>
+                                <field name="display"/>
+                                <field name="background" widget="color"/>
+                                <field name="color" widget="color"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pos_ui_search" model="ir.ui.view">
+            <field name="name">pos.ui.filter</field>
+            <field name="model">pos.ui</field>
+            <field name="arch" type="xml">
+                <search string="Receipt Design">
+                    <field name="config_id"/>
+                    <field name="tag"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_pos_ui">
+            <field name="name">POS UI Designs</field>
+            <field name="res_model">pos.ui</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_action_pos_ui"
+                  parent="menu_master_data"
+                  sequence="104"
+                  action="action_pos_ui"
+        />
+
+    </data>
+</odoo>

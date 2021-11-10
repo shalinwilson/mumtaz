@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xmlspace="preserve">
+
+    <t t-name="hide_keyboard_guide_widget">
+        <div class="oe_status js_synch keyboard-guide" style="max-width 20px;margin-left -5px;">
+            <span class='js_msg oe_hidden'>0</span>
+            <div class="js_connected oe_icon">
+                <i class='fa fa-keyboard' role="img" aria-label="Keyboard Guide" title="Keyboard Guide"></i>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="KeyBoard_Guide_Widget">
+        <div class="debug-widget keyboard oe_hidden" style="min-width: 1000px">
+            <h1>Keyboard Shortcut</h1>
+            <div class="toggle">
+                <i class='fa fa-times'/>
+            </div>
+            <div class="content">
+                <div class="keyboard">
+                    <div class="keyboard__row keyboard__row--h1">
+                        <div data-key="27" class="key--word supported">
+                            <span class="label">ESC</span>
+                            <span>Close PopUp or Back Screen</span>
+                        </div>
+                        <div data-key="112" class="key--fn">
+                            <span class="label">F1</span>
+                            <span>Open KeyBoard Guider</span>
+                        </div>
+                        <div data-key="113" class="key--fn supported">
+                            <span class="label">F2</span>
+                            <span>Print Last Receipt</span>
+                        </div>
+                        <div data-key="114" class="key--fn supported">
+                            <span class="label">F3</span>
+                            <span>Note Order</span>
+                        </div>
+                        <div data-key="115" class="key--fn supported">
+                            <span class="label">F4</span>
+                            <span>Open Purchased Histories</span>
+                        </div>
+                        <div data-key="116" class="key--fn supported">
+                            <span class="label">F5</span>
+                            <span>Reload POS</span>
+                        </div>
+                        <div data-key="117" class="key--fn supported">
+                            <span class="label">F6</span>
+                            <span>Open Cash Control</span>
+                        </div>
+                        <div data-key="118" class="key--fn supported">
+                            <span class="label">F7</span>
+                            <span>Price Lists</span>
+                        </div>
+                        <div data-key="119" class="key--fn supported">
+                            <span class="label">F8</span>
+                            <span>Print Bill</span>
+                        </div>
+                        <div data-key="120" class="key--fn supported">
+                            <span class="label">F9</span>
+                            <span>Reporting</span>
+                        </div>
+                        <div data-key="121" class="key--fn supported">
+                            <span>F10</span>
+                            <span>Add Charge Service</span>
+                        </div>
+                        <div data-key="122" class="key--fn">
+                            <span>F11</span>
+                        </div>
+                        <div data-key="123" class="key--fn">
+                            <span>F12</span>
+                        </div>
+                    </div>
+                    <div class="keyboard__row">
+                        <div class="key--double supported" data-key="192">
+                            <span class="label">~</span>
+                            <span>Show Pricelist</span>
+                        </div>
+                        <div class="key--double supported" data-key="49">
+                            <div class="label">1</div>
+                        </div>
+                        <div class="key--double supported" data-key="50">
+                            <div class="label">2</div>
+                        </div>
+                        <div class="key--double supported" data-key="51">
+                            <div class="label">3</div>
+                        </div>
+                        <div class="key--double supported" data-key="52">
+                            <div class="label">4</div>
+                        </div>
+                        <div class="key--double supported" data-key="53">
+                            <div class="label">5</div>
+                        </div>
+                        <div class="key--double supported" data-key="54">
+                            <div class="label">6</div>
+                        </div>
+                        <div class="key--double supported" data-key="55">
+                            <div class="label">7</div>
+                        </div>
+                        <div class="key--double supported" data-key="56">
+                            <div class="label">8</div>
+                        </div>
+                        <div class="key--double supported" data-key="57">
+                            <div class="label">9</div>
+                        </div>
+                        <div class="key--double supported" data-key="48">
+                            <div class="label">0</div>
+                        </div>
+                        <div class="key--double supported" data-key="189">
+                            <span class="label">_</span>
+                            <span>+ 1 (qty, disc, price)</span>
+                        </div>
+                        <div class="key--double supported" data-key="187">
+                            <span class="label">+</span>
+                            <span>- 1 (qty, disc, price)</span>
+                        </div>
+                        <div class="key--bottom-right key--word key--w4 supported" data-key="8" style="width: 100px">
+                            <div class="label">BackSpace</div>
+                            <div>Undo (Remove Line)</div>
+                        </div>
+                    </div>
+                    <div class="keyboard__row">
+                        <div class="key--bottom-left key--word key--w4 supported" data-key="9">
+                            <span class="label">Tab</span>
+                            <span>Promotions</span>
+                        </div>
+                        <div class="key--letter supported" data-char="Q">
+                            <span class="label">Q</span>
+                            <span>Mode Quantity</span>
+                        </div>
+                        <div class="key--letter supported" data-char="W">
+                            <span class="label">W</span>
+                            <span>Add New Category</span>
+                        </div>
+                        <div class="key--letter supported" data-char="E">
+                            <span class="label">E</span>
+                            <span>Edit Line</span>
+                        </div>
+                        <div class="key--letter supported" data-char="R">
+                            <span class="label">R</span>
+                            <span>Remove Selected Order</span>
+                        </div>
+                        <div class="key--letter supported" data-char="T">
+                            <span class="label">T</span>
+                            <span>Set Tags to Line</span>
+                        </div>
+                        <div class="key--letter supported" data-char="Y">
+                            <span class="label">Y</span>
+                            <span>Disc to Line</span>
+                        </div>
+                        <div class="key--letter supported" data-char="U">
+                            <span class="label">U</span>
+                            <span>Set Note to Line</span>
+                        </div>
+                        <div class="key--letter supported" data-char="I">
+                            <span class="label">I</span>
+                            <span>Go Invoices Screen</span>
+                        </div>
+                        <div class="key--letter supported" data-char="O">
+                            <span class="label">O</span>
+                            <span>Go Orders Screen</span>
+                        </div>
+                        <div class="key--letter supported" data-char="P">
+                            <span class="label">P</span>
+                            <span>Mode Price</span>
+                        </div>
+                        <div class="key--double supported" data-key="45" data-char="ins">
+                            <div>Ins</div>
+                            <div>Insert (Add new Product)</div>
+                        </div>
+                    </div>
+                    <div class="keyboard__row">
+                        <div class="key--bottom-left key--word key--w5" data-key="20">
+                            <span>Caps Lock</span>
+                        </div>
+                        <div class="key--letter supported" data-char="A">
+                            <span class="label">A</span>
+                            <span>New Client</span>
+                        </div>
+                        <div class="key--letter supported" data-char="S">
+                            <span class="label">S</span>
+                            <span>Lookup Products</span>
+                        </div>
+                        <div class="key--letter supported" data-char="D">
+                            <span class="label">D</span>
+                            <span>Mode Disc %</span>
+                        </div>
+                        <div class="key--letter supported" data-char="F">
+                            <span class="label">F</span>
+                            <span>Auto Payment Full</span>
+                        </div>
+                        <div class="key--letter supported" data-char="G">
+                            <span class="label">G</span>
+                            <span>Show Tickets</span>
+                        </div>
+                        <div class="key--letter supported" data-char="H">
+                            <span class="label">H</span>
+                            <span>Back Home Products</span>
+                        </div>
+                        <div class="key--letter supported" data-char="J">
+                            <span class="label">J</span>
+                            <span>Tables Screen</span>
+                        </div>
+                        <div class="key--letter supported" data-char="K">
+                            <span class="label">K</span>
+                            <span>Lookup Clients</span>
+                        </div>
+                        <div class="key--letter supported" data-char="L">
+                            <span class="label">L</span>
+                            <span>Locked Screen</span>
+                        </div>
+                        <div class="key--double" data-key="186">
+                            <div>:</div>
+                            <div>;</div>
+                        </div>
+                        <div class="key--double" data-key="222">
+                            <div>"</div>
+                            <div>'</div>
+                        </div>
+                        <div class="key--bottom-right key--word key--w5 supported" data-key="13">
+                            <span class="label">Enter</span>
+                            <span>Go Payment Screen</span>
+                        </div>
+                    </div>
+                    <div class="keyboard__row">
+                        <div class="key--bottom-left key--word key--w6" data-key="16">
+                            <span>Shift</span>
+                        </div>
+                        <div class="key--letter supported" data-char="Z">
+                            <span class="label">Z</span>
+                            <span>Create new Product</span>
+                        </div>
+                        <div class="key--letter supported" data-char="X">
+                            <span class="label">X</span>
+                            <span>Hide Line Selected Box</span>
+                        </div>
+                        <div class="key--letter supported" data-char="C">
+                            <span class="label">C</span>
+                            <span>Go Clients Screen</span>
+                        </div>
+                        <div class="key--letter supported" data-char="V">
+                            <span class="label">V</span>
+                            <span>Change Product View</span>
+                        </div>
+                        <div class="key--letter supported" data-char="B">
+                            <span class="label">B</span>
+                            <span>Open Booked Orders</span>
+                        </div>
+                        <div class="key--letter supported" data-char="N">
+                            <span class="label">N</span>
+                            <span>New Order</span>
+                        </div>
+                        <div class="key--letter supported" data-char="M">
+                            <span class="label">M</span>
+                            <span>Hide/Show Cart List</span>
+                        </div>
+                        <div class="key--double" data-key="188">
+                            <div>,</div>
+                        </div>
+                        <div class="key--double" data-key="190">
+                            <div>.</div>
+                        </div>
+                        <div class="key--double supported" data-key="191">
+                            <div>/</div>
+                            <span>Logout Session</span>
+                        </div>
+                        <div class="key--bottom-right key--word key--w6" data-key="16-R">
+                            <span class="label"></span>
+                        </div>
+                    </div>
+                    <div class="keyboard__row keyboard__row--h3">
+                        <div class="key--bottom-left key--word">
+                            <span class="label"></span>
+                        </div>
+                        <div class="key--bottom-left key--word key--w1" data-key="17">
+                            <span class="label"></span>
+                        </div>
+                        <div class="key--bottom-left key--word key--w1" data-key="18">
+                            <span class="label"></span>
+                        </div>
+                        <div class="key--bottom-right key--word key--w3" data-key="91">
+                            <span class="label"></span>
+                        </div>
+                        <div class="key--double key--right key--space supported" data-key="32" data-char=" ">
+                            <span class="label">Space</span>
+                            <span>Go Clients Screen</span>
+                        </div>
+                        <div class="key--bottom-left key--word key--w3" data-key="93-R">
+                            <span class="label"></span>
+                        </div>
+                        <div class="key--bottom-left key--word key--w1" data-key="18-R">
+                            <span class="label"></span>
+                        </div>
+                        <div data-key="37" class="key--arrow supported">
+                            <span class="label">Move Left</span>
+                            <span>Move Left Order</span>
+                        </div>
+                        <div class="key--double key--arrow--tall" data-key="38">
+                            <div data-key="39" class="key--arrow">
+                                <span class="label"></span>
+                            </div>
+                            <div data-key="39" class="key--arrow">
+                                <span class="label"></span>
+                            </div>
+                        </div>
+                        <div data-key="39" class="key--arrow supported">
+                            <span class="label">Move Right</span>
+                            <span>Move Right Order</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="KeyBoard_Guide_Widget1">
+        <div class="debug-widget oe_hidden">
+            <h1>Keyboard Shortcut</h1>
+            <div class="toggle">
+                <i class='fa fa-times'/>
+            </div>
+            <div class="content">
+                <p class="category">Products Screen (Scroll Your Mouse View more ...)</p>
+                <ul>
+                    <li class="button">Number
+                        <span class="guide">0 to 9</span>
+                    </li>
+                    <li class="button">Plus/Reduce +- 1
+                        <span class="guide">+/-</span>
+                    </li>
+                    <li class="button">Clear Input
+                        <span class="guide">Backspace</span>
+                    </li>
+                    <li class="button">Remove Selected Line
+                        <span class="guide">Del</span>
+                    </li>
+                    <li class="button">Search Products
+                        <span class="guide">s</span>
+                    </li>
+                    <li class="button">Search Client (mobile/email)
+                        <span class="guide">k</span>
+                    </li>
+                    <li class="button">Clear Search Box
+                        <span class="guide">ESC</span>
+                    </li>
+                    <li class="button">Change mode Quantity
+                        <span class="guide">q</span>
+                    </li>
+                    <li class="button">Change mode Discount
+                        <span class="guide">d</span>
+                    </li>
+                    <li class="button">Change mode Price
+                        <span class="guide">p</span>
+                    </li>
+                    <li class="button">Auto Register Payment Full Amount
+                        <span class="guide">f</span>
+                    </li>
+                    <li class="button">Focus Your Mouse to Search Products Box
+                        <span class="guide">s</span>
+                    </li>
+                    <li class="button">Focus Your Mouse to Search Partner Box
+                        <span class="guide">k</span>
+                    </li>
+                    <li class="button">Add New Order
+                        <span class="guide">n</span>
+                    </li>
+                    <li class="button">Remove Current Order
+                        <span class="guide">r</span>
+                    </li>
+                    <li class="button">Add New Customer
+                        <span class="guide">a</span>
+                    </li>
+                    <li class="button">Add New Product
+                        <span class="guide">e</span>
+                    </li>
+                    <li class="button">Add New POS Category
+                        <span class="guide">w</span>
+                    </li>
+                    <li class="button">Switch Product View
+                        <span class="guide">v</span>
+                    </li>
+                    <li class="button">Show/Hide Buttons Layout
+                        <span class="guide">b</span>
+                    </li>
+                    <li class="button">Show/Hide Numpad Layout
+                        <span class="guide">h</span>
+                    </li>
+                    <li class="button">Lock Screen
+                        <span class="guide">l</span>
+                    </li>
+                    <li class="button">Go Orders Screen
+                        <span class="guide">o</span>
+                    </li>
+                    <li class="button">Go Invoices Screen
+                        <span class="guide">i</span>
+                    </li>
+                    <li class="button">Go Clients screen
+                        <span class="guide">c</span>
+                    </li>
+                    <li class="button">Go Client Screen
+                        <span class="guide">Space</span>
+                    </li>
+                </ul>
+
+                <p class="category">Payment Screen</p>
+                <ul>
+                    <li class="button">Input number
+                        <span class="guide">0 to 9</span>
+                    </li>
+                    <li class="button">Back Products Screen
+                        <span class="guide">b or esc</span>
+                    </li>
+                    <li class="button">Prefill Cash Payment
+                        <span class="guide">f</span>
+                    </li>
+                    <li class="button">Parital Payment
+                        <span class="guide">p</span>
+                    </li>
+                    <li class="button">Validate
+                        <span class="guide">Space</span>
+                    </li>
+                    <li class="button">Set Customer
+                        <span class="guide">c</span>
+                    </li>
+                    <li class="button">Input Voucher
+                        <span class="guide">v</span>
+                    </li>
+                    <li class="button">Signature Receipt
+                        <span class="guide">s</span>
+                    </li>
+                    <li class="button">Set Note
+                        <span class="guide">n</span>
+                    </li>
+                    <li class="button">Set Invoice
+                        <span class="guide">i</span>
+                    </li>
+                    <li class="button">Set Change Due to Wallet
+                        <span class="guide">w</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </t>
+
+</templates>

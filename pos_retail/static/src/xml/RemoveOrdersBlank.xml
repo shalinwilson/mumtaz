@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="remove_orders_blank_widget">
+        <div class="oe_status js_synch remove-orders-blank" title="Remove Orders Blank">
+            <i class="material-icons">clear</i>
+        </div>
+    </t>
+
+</templates>

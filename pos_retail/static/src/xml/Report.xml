@@ -1,0 +1,1635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates name="template" xml:space="preserve">
+
+    <t t-name="ButtonReport">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/report.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Report Sale Analytic
+                    <span class="keyboard-shortcut">
+                        <i class="fa fa-keyboard"/>
+                        (F9)
+                    </span>
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="header_report">
+        <div class="receipt-line">
+            <span>
+                Company
+            </span>
+            <span class="pos-receipt-right-align">
+                <t t-esc="widget.pos.company.name"/>
+            </span>
+        </div>
+        <t t-if="widget.pos.company.phone">
+            <div class="receipt-line">
+                <span>
+                    Phone
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.pos.company.phone"/>
+                </span>
+            </div>
+        </t>
+        <t t-if="widget.pos.company.email">
+            <div class="receipt-line">
+                <span>
+                    Email
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.pos.company.email"/>
+                </span>
+            </div>
+        </t>
+        <t t-if="widget.pos.cashier || widget.pos.user">
+            <div class="receipt-line">
+                <span>
+                    Cashier/Seller
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.pos.cashier ? widget.pos.cashier.name : widget.pos.user.name"/>
+                </span>
+            </div>
+        </t>
+        <t t-if="from_date and to_date">
+            <div class="receipt-line">
+                <span>
+                    From:<t t-esc="from_date"/>
+                </span>
+                <span class="pos-receipt-right-align">
+                    To:<t t-esc="to_date"/>
+                </span>
+            </div>
+        </t>
+        <br/>
+    </t>
+
+    <t t-name="popup_sale_summary_session_report">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y"
+                 style="max-height: 600px;min-height: 300px;height: fit-content;">
+                <div class="card">
+                    <div class="card-content">
+                        <t t-if="widget.options.title">
+                            <h4 class="card-title">
+                                <t t-esc="widget.options.title || ''"/>
+                            </h4>
+                        </t>
+                        <t t-if="widget.options.body">
+                            <p class="body"><t t-esc=" widget.options.body || '' " /></p>
+                        </t>
+                        <span class="card-issue"/>
+                        <div class="form-footer text-right">
+                            <div class="btn btn-success pull-right confirm">
+                                Print <i class='fa fa-keyboard'/> (Enter)
+                            </div>
+                            <div class="btn btn-danger pull-left cancel">
+                                Close <i class='fa fa-keyboard'/> (ESC)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="report_sale_summary_session_html">
+        <div class="pos-receipt">
+            <div class="pos-receipt-contact">
+                <h1>Z-REPORT</h1>
+            </div>
+            <div class="receipt-line">
+                <span>
+                    Print Date
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="report.current_date"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span>
+                    Print Time
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="report.current_time"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span>
+                    Shop
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="report.session.config_id[1]"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span>
+                    Cashier/Seller
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="report.seller"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span>
+                    State
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="report.state"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span>
+                    Started at
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="report.start_at"/>
+                </span>
+            </div>
+            <t t-if="report.stop_at">
+                <div class="receipt-line">
+                    <span>
+                        Stop at
+                    </span>
+                    <span class="pos-receipt-right-align">
+                        <t t-esc="report.stop_at"/>
+                    </span>
+                </div>
+            </t>
+            <div class="receipt-line">
+                <span>
+                    Total Orders
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="report.session.order_ids.length"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span>
+                    Cash Register Balance Start
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.format_currency(report.cash_register_balance_start)"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span>
+                    Sale Total
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.format_currency(report.sales_total)"/>
+                </span>
+            </div>
+            <t t-if="report.taxes">
+                <div class="pos-receipt-contact">
+                    <h5>TAXES DETAIL</h5>
+                </div>
+                <div class='orderlines'>
+                    <t t-foreach="report['taxes']" t-as="tax">
+                        <div class="receipt-line">
+                            <t t-esc="tax.tax_name"/>
+                            <span class="pos-receipt-center-align">
+                                <t t-esc="tax.tax_total.toFixed(2)"/>
+                            </span>
+                            <span class="pos-receipt-right-align">
+                                <t t-esc="tax.net_total.toFixed(2)"/>
+                            </span>
+                        </div>
+                    </t>
+                </div>
+            </t>
+            <t t-if="report.reversal_total &lt; 0">
+                <div class="pos-receipt-contact">
+                    <h5><div>Reversal Information</div></h5>
+                </div>
+                <div class="receipt-line">
+                    <span class="amount_total">
+                        Reversal Total
+                    </span>
+                    <span class="pos-receipt-right-align">
+                        <t t-esc="widget.format_currency_no_symbol(report.reversal_total)"/>
+                    </span>
+                </div>
+                <div class='orderlines'>
+                    <t t-foreach='report.reversal_orders_detail' t-as='order'>
+                        <t t-set="reversal_order_detail" t-value="report.reversal_orders_detail[order]"/>
+                        <div class="receipt-line">
+                            Order Ref
+                            <span class="pos-receipt-right-align">
+                                <t t-esc="order"/>
+                            </span>
+                        </div>
+                        <t t-foreach='reversal_order_detail' t-as='line'>
+                            <div class="receipt-line">
+                                <t t-esc='line.qty' /> <t t-esc='line.product_id' />
+                                <span class="pos-receipt-right-align">
+                                    <t t-esc="widget.format_currency_no_symbol(line.price_subtotal_incl)"/>
+                                </span>
+                            </div>
+                        </t>
+                    </t>
+                </div>
+            </t>
+            <t t-if="report.payments_amount.length">
+                <div class="pos-receipt-contact">
+                    <h5>PAYMENT METHOD</h5>
+                </div>
+                <div class='orderlines'>
+                    <t t-foreach="report['payments_amount']" t-as="payment_method">
+                        <div class="receipt-line">
+                            <t t-esc="payment_method.name"/>
+                            <span class="pos-receipt-right-align">
+                                <t t-esc="widget.format_currency_no_symbol(payment_method.amount)"/>
+                            </span>
+                        </div>
+                    </t>
+                </div>
+            </t>
+            <t t-if="report.cashs_in.length">
+                <div class="pos-receipt-contact">
+                    <h5>CASH IN</h5>
+                </div>
+                <div class='orderlines'>
+                    <t t-foreach="report['cashs_in']" t-as="cash">
+                        <div class="receipt-line">
+                            <t t-esc="cash.date"/>
+                            <span class="pos-receipt-right-align">
+                                <t t-esc="widget.format_currency_no_symbol(cash.amount)"/>
+                            </span>
+                        </div>
+                    </t>
+                </div>
+            </t>
+            <t t-if="report.cashs_in.length">
+                <div class="pos-receipt-contact">
+                    <h5>CASH OUT</h5>
+                </div>
+                <div class='orderlines'>
+                    <t t-foreach="report['cashs_out']" t-as="cash">
+                        <div class="receipt-line">
+                            <t t-esc="cash.date"/>
+                            <span class="pos-receipt-right-align">
+                                <t t-esc="widget.format_currency_no_symbol(cash.amount)"/>
+                            </span>
+                        </div>
+                    </t>
+                </div>
+            </t>
+            <div class="pos-receipt-contact">
+                <h5>USERS SUMMARY</h5>
+            </div>
+            <div class='orderlines'>
+                <t t-foreach="report['users_summary']" t-as="user">
+                    <div class="receipt-line">
+                        <t t-esc="user"/>
+                        <span class="pos-receipt-right-align">
+                            <t t-esc="widget.format_currency_no_symbol(report['users_summary'][user])"/>
+                        </span>
+                    </div>
+                </t>
+            </div>
+            <div class="pos-receipt-contact">
+                <h5>SUMMARY</h5>
+            </div>
+            <div class="receipt-line">
+                <span class="amount_total">
+                    Refund
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.format_currency_no_symbol(report.refund_total)"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span class="amount_total">
+                    Discount
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.format_currency_no_symbol(report.discounts_total)"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span class="amount_total">
+                    Gross
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.format_currency_no_symbol(report.gross_total)"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span class="amount_total">
+                    Gross Profit
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.format_currency_no_symbol(report.gross_profit_total)"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span class="amount_total">
+                    Net
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.format_currency_no_symbol(report.net_gross_total)"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span class="amount_total">
+                    Cash-Regis Balance End
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.format_currency_no_symbol(report.cash_register_balance_end)"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span class="amount_total">
+                    Cash-Regis Balance End Real
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.format_currency_no_symbol(report.cash_register_balance_end_real)"/>
+                </span>
+            </div>
+            <div class="receipt-line">
+                <span class="amount_total">
+                    Closing Total
+                </span>
+                <span class="pos-receipt-right-align">
+                    <t t-esc="widget.format_currency_no_symbol(report.closing_total)"/>
+                </span>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="report_sale_summary_session_xml">
+        <receipt align='center' width='40' value-thousands-separator='' >
+            <h1>Z-REPORT</h1>
+            <br/>
+            <h1><t t-esc='report.name' /></h1>
+            <br/>
+            <div font='b'>
+                <line>
+                    <left>Shop</left>
+                    <right><t t-esc='report.session.config_id[1]' /></right>
+                </line>
+                <line>
+                    <left>Seller</left>
+                    <right><t t-esc='report.user_id' /></right>
+                </line>
+                <line>
+                    <left>Date</left>
+                    <right><t t-esc='report.date' /></right>
+                </line>
+                <line>
+                    <left>Time</left>
+                    <right><t t-esc='report.time' /></right>
+                </line>
+                <line>
+                    <left>State</left>
+                    <right><t t-esc='report.state' /></right>
+                </line>
+                <line>
+                    <left>Start At</left>
+                    <right><t t-esc='report.start_at' /></right>
+                </line>
+                <line>
+                    <left>Stop At</left>
+                    <right><t t-esc='report.stop_at' /></right>
+                </line>
+                <line>
+                    <left>Total Orders</left>
+                    <right><t t-esc='report.session.order_ids.length' /></right>
+                </line>
+            </div>
+            <br />
+            <div font='b'>
+                <line>
+                    <left>Cash Register Balance Start</left>
+                    <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='report.cash_register_balance_start' /></value></right>
+                </line>
+                <line>
+                    <left>Sales Total</left>
+                    <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='report.sales_total' /></value></right>
+                </line>
+            </div>
+            <br />
+            <t t-if="report.taxes.length">
+                <div font='b'>
+                    <h6><div>TAXES</div></h6>
+                </div>
+                <br/>
+                <div class='orderlines' line-ratio='0.6'>
+                    <t t-foreach='report.taxes' t-as='tax'>
+                        <line>
+                            <left><t t-esc='tax.tax_name' /></left>
+                            <right>
+                                <value t-att-value-decimals='pos.currency.decimals'><t t-esc='tax.tax_total' /></value>
+                            </right>
+                        </line>
+                        <line indent='1'>
+                            <left>
+                                Per:
+                                <t t-esc='tax.tax_per' />
+                                with Gross:
+                                <t t-esc='tax.gross_tax' />
+                            </left>
+                            <right>
+                                and Net:
+                                <value t-att-value-decimals='pos.currency.decimals'><t t-esc='tax.net_total' /></value>
+                            </right>
+                        </line>
+                    </t>
+                </div>
+            </t>
+            <br/>
+            <t t-if="report.reversal_total &lt; 0">
+                <div font='b'>
+                    <h6><div>Reversal Information</div></h6>
+                </div>
+                <line>
+                    <left>Reversal Total</left>
+                    <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='report.reversal_total' /></value></right>
+                </line>
+                <div class='orderlines' line-ratio='0.6'>
+                    <t t-foreach='report.reversal_orders_detail' t-as='order'>
+                        <t t-set="reversal_order_detail" t-value="report.reversal_orders_detail[order]"/>
+                        <line>
+                            <left>Order Ref</left>
+                            <right><t t-esc="order"/></right>
+                        </line>
+                        <t t-foreach='reversal_order_detail' t-as='line'>
+                            <line>
+                                <left><t t-esc='line.qty' /> <t t-esc='line.product_id' /></left>
+                                <right>
+                                    <value t-att-value-decimals='pos.currency.decimals'><t t-esc='line.price_subtotal_incl' /></value>
+                                </right>
+                            </line>
+                        </t>
+                    </t>
+                </div>
+                <br/>
+            </t>
+            <div font='b'>
+                <h6><div>JOURNAL</div></h6>
+            </div>
+            <br/>
+            <div class='orderlines' line-ratio='0.6'>
+                <t t-foreach='report.payments_amount' t-as='payment_method'>
+                    <line>
+                        <left><t t-esc='payment_method.name' /></left>
+                        <right>
+                            <value t-att-value-decimals='pos.currency.decimals'><t t-esc='payment_method.amount' /></value>
+                        </right>
+                    </line>
+                </t>
+            </div>
+            <br/>
+            <t t-if="report.cashs_in.length">
+                <div font='b'>
+                    <h6><div>CASH IN</div></h6>
+                </div>
+                <br/>
+                <div class='orderlines' line-ratio='0.6'>
+                    <t t-foreach='report.cashs_in' t-as='cash'>
+                        <line>
+                            <left><t t-esc='cash.date' /></left>
+                            <right>
+                                <value t-att-value-decimals='pos.currency.decimals'><t t-esc='cash.amount' /></value>
+                            </right>
+                        </line>
+                    </t>
+                </div>
+            </t>
+            <t t-if="report.cashs_out.length">
+                <br/>
+                <div font='b'>
+                    <h6><div>CASH OUT</div></h6>
+                </div>
+                <br/>
+                <div class='orderlines' line-ratio='0.6'>
+                    <t t-foreach='report.cashs_out' t-as='cash'>
+                        <line>
+                            <left><t t-esc='cash.date' /></left>
+                            <right>
+                                <value t-att-value-decimals='pos.currency.decimals'><t t-esc='cash.amount' /></value>
+                            </right>
+                        </line>
+                    </t>
+                </div>
+            </t>
+            <br/>
+            <div font='b'>
+                <h6><div>SUMMARY</div></h6>
+            </div>
+            <br/>
+            <line class='total'>
+                <left>DISCOUNT</left>
+                <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='report.discounts_total' /></value></right>
+            </line>
+            <br/>
+            <line class='total'>
+                <left><pre>GROSS TOTAL</pre></left>
+                <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='report.gross_total' /></value></right>
+            </line>
+            <br/>
+            <line class='total'>
+                <left><pre>GROSS PROFIT TOTAL</pre></left>
+                <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='report.gross_profit_total' /></value></right>
+            </line>
+            <br/>
+            <line class='total'>
+                <left><pre>NET TOTAL</pre></left>
+                <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='report.net_gross_total' /></value></right>
+            </line>
+            <br/>
+            <line class='total'>
+                <left><pre>CASH REGISTER BALANCE END</pre></left>
+                <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='report.session.cash_register_balance_end' /></value></right>
+            </line>
+            <br/>
+            <line class='total'>
+                <left><pre>CASH REGISTER BALANCE END REAL</pre></left>
+                <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='report.cash_register_balance_end_real' /></value></right>
+            </line>
+            <br/>
+            <line class='total'>
+                <left><pre>CLOSING TOTAL</pre></left>
+                <right><value t-att-value-decimals='pos.currency.decimals'><t t-esc='report.closing_total' /></value></right>
+            </line>
+        </receipt>
+    </t>
+
+    <t t-name="popup_report_product_summary">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y"
+                 style="max-height: 600px;min-height: 300px;height: fit-content;">
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">
+                            Product Summary Report
+                        </h4>
+                        <div class="row">
+                            <label class="label checkbox-label">Current Session Report</label>
+                            <input type="checkbox"
+                                   name="current_session_report"
+                                   id="current_session_report"
+                                   style="box-shadow:none;width: 20px;margin-top: -8px;"
+                                   class="popup_field">
+                                <span class="checkbox-material"><span class="check"></span></span>
+                            </input>
+                        </div>
+                        <div class="date_input_container">
+                            <div class="row">
+                                <span class='label voucher-label'><i class="fa fa-calendar"/> From Date</span>
+                                <input type="text" class="form-control datepicker popup_field input_required" name="from_date"/>
+                            </div>
+                            <div class="row">
+                                <span class='label voucher-label'><i class="fa fa-calendar"/> To Date</span>
+                                <input type="text" class="form-control datepicker popup_field input_required" name="to_date"/>
+                            </div>
+                            <div class="row">
+                                <label class="label checkbox-label">Product</label>
+                                <input type="checkbox"
+                                       name="product_summary"
+                                       style="box-shadow:none;width: 20px;margin-top: -8px;"
+                                       class="popup_field">
+                                    <span class="checkbox-material"><span class="check"></span></span>
+                                </input>
+                            </div>
+                            <div class="row">
+                                <label class="label checkbox-label">Category</label>
+                                <input type="checkbox"
+                                       name="category_summary"
+                                       style="box-shadow:none;width: 20px;margin-top: -8px;"
+                                       class="popup_field">
+                                    <span class="checkbox-material"><span class="check"></span></span>
+                                </input>
+                            </div>
+                            <div class="row">
+                                <label class="label checkbox-label">Location</label>
+                                <input type="checkbox"
+                                       name="location_summary"
+                                       style="box-shadow:none;width: 20px;margin-top: -8px;"
+                                       class="popup_field">
+                                    <span class="checkbox-material"><span class="check"></span></span>
+                                </input>
+                            </div>
+                            <div class="row">
+                                <label class="label checkbox-label">Payment</label>
+                                <input type="checkbox"
+                                       name="payment_summary"
+                                       style="box-shadow:none;width: 20px;margin-top: -8px;"
+                                       class="popup_field">
+                                    <span class="checkbox-material"><span class="check"></span></span>
+                                </input>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="label voucher-label">No.of Copies</label>
+                            <input type="number" class="form-control popup_field input_required" name="no_of_copies" t-att-value="widget.pos.config.report_no_of_report"/>
+                        </div>
+                        <span class="card-issue"/>
+                        <div class="form-footer text-right">
+                            <div class="btn btn-success pull-right confirm">
+                                Print <i class='fa fa-keyboard'/> (Enter)
+                            </div>
+                            <div class="btn btn-danger pull-left cancel">
+                                Close <i class='fa fa-keyboard'/> (ESC)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="report_product_summary_html">
+        <div class="pos-receipt">
+            <div class="pos-receipt-contact">
+                <h5>PRODUCTS SUMMARY REPORT</h5>
+            </div>
+            <t t-call="header_report"/>
+            <t t-if="product_summary">
+                <div class="pos-receipt-contact">
+                    <h5>PRODUCT DETAILS</h5>
+                </div>
+                <t t-set="product_total_qty" t-value="0"/>
+                <div class='orderlines'>
+                    <t t-foreach="summary['product_summary']" t-as="product">
+                        <div class="receipt-line">
+                            <t t-esc="product.name"/>
+                            <span class="pos-receipt-right-align">
+                                <t t-esc="product.quantity"/>
+                            </span>
+                        </div>
+                        <t t-set="product_total_qty" t-value="product_total_qty + product.quantity"/>
+                    </t>
+                    <div class="receipt-line">
+                        -----------------
+                        <span class="pos-receipt-right-align">
+                            -----------------
+                        </span>
+                    </div>
+                    <t t-if="product_total_qty > 0">
+                        <div class="receipt-line">
+                            <span class="amount_total">
+                                Total
+                            </span>
+                            <span class="pos-receipt-right-align amount_total">
+                                <t t-esc="product_total_qty"/>
+                            </span>
+                        </div>
+                    </t>
+                </div>
+            </t>
+
+            <t t-if="category_summary">
+                <div class="pos-receipt-contact">
+                    <h5>CATEGORY DETAILS</h5>
+                </div>
+                <div class='orderlines'>
+                    <t t-foreach="summary['category_summary']" t-as="category">
+                        <div class="receipt-line">
+                            <t t-esc="category"/>
+                            <span class="pos-receipt-right-align">
+                                <t t-esc="summary['category_summary'][category]"/>
+                            </span>
+                        </div>
+                    </t>
+                    <div class="receipt-line">
+
+                        -----------------
+                        <span class="pos-receipt-right-align">
+                            -----------------
+                        </span>
+                    </div>
+                    <div class="receipt-line">
+                        <span class="amount_total">
+                            Total
+                        </span>
+                        <span class="pos-receipt-right-align amount_total">
+                            <t t-esc="category_total_qty"/>
+                        </span>
+                    </div>
+                </div>
+            </t>
+
+            <t t-if="payment_summary">
+                <div class="pos-receipt-contact">
+                    <h5>PAYMENT DETAILS</h5>
+                </div>
+                <div class='orderlines'>
+                    <t t-foreach="summary['payment_summary']" t-as="payment">
+                        <div class="receipt-line">
+                            <t t-esc="payment"/>
+                            <span class="pos-receipt-right-align">
+                                <t t-esc="widget.format_currency(summary['payment_summary'][payment])"/>
+                            </span>
+                        </div>
+                    </t>
+                    <div class="receipt-line">
+                        -----------------
+                        <span class="pos-receipt-right-align">
+                            -----------------
+                        </span>
+                    </div>
+                    <div class="receipt-line">
+                        <span class="amount_total">
+                            Total
+                        </span>
+                        <span class="pos-receipt-right-align amount_total">
+                            <t t-esc="widget.format_currency(payment_summary_total)"/>
+                        </span>
+                    </div>
+                </div>
+            </t>
+
+            <t t-if="location_summary">
+                <div class="pos-receipt-contact">
+                    <h5>LOCATION DETAILS</h5>
+                </div>
+                <div class='orderlines'>
+                    <t t-foreach="summary['location_summary']" t-as="location">
+                        <t t-set="total" t-value="0"/>
+                        <t t-foreach="summary['location_summary'][location]" t-as="product">
+                            <div class="receipt-line">
+                                <t t-esc="product"/>
+                                <span class="pos-receipt-right-align">
+                                    <t t-esc="summary['location_summary'][location][product]"/>
+                                </span>
+                                <t t-set="total" t-value="summary['location_summary'][location][product] + total"/>
+                            </div>
+                        </t>
+                        <div class="receipt-line">
+                            -----------------
+                            <span class="pos-receipt-right-align">
+                                -----------------
+                            </span>
+                        </div>
+                        <div class="receipt-line">
+                            <span class="amount_total">
+                                <t t-esc="location"/>
+                            </span>
+                            <span class="pos-receipt-right-align amount_total">
+                                <t t-esc="total"/>
+                            </span>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </div>
+    </t>
+    
+    <t t-name="report_product_summary_xml">
+        <receipt align='center' width='40' value-thousands-separator='' >
+            <h5><t t-esc='pos.company.name' /></h5>
+            <br />
+            <t t-if="pos.config.pos_branch_id">
+                <h6><t t-esc="pos.config.pos_branch_id[1]"/></h6>
+            </t>
+            <t t-if="from_date and to_date">
+                <b>Start Date : </b><t t-esc="from_date" /><br/>
+                <b>End Date : </b><t t-esc="to_date" />
+                <br/><br/>
+            </t>
+            <t t-if="product_summary">
+                <br/>
+                <h5>Product Summary</h5>
+                <line>
+                    <left>Product</left>
+                    <right>Qty</right>
+                </line>
+                <line>
+                    <left>-----------------</left>
+                    <right>----------------</right>
+                </line>
+                <t t-foreach="summary['product_summary']" t-as='product'>
+                    <line>
+                        <left><t t-esc='product.name' /></left>
+                        <right><t t-esc="widget.format_currency_no_symbol(product.quantity)"/> </right>
+                    </line>
+                </t>
+            </t>
+            <hr />
+            <t t-if="product_total_qty">
+                <line>
+                    <left>Total</left>
+                    <right><t t-esc="widget.format_currency_no_symbol(product_total_qty)"/> </right>
+                </line>
+                <br/>
+            </t>
+            <t t-if="category_summary">
+                <h5>Category Summary</h5>
+                <line>
+                    <left>Category</left>
+                    <right>Qty</right>
+                </line>
+                 <line>
+                    <left>-----------------</left>
+                    <right>----------------</right>
+                </line>
+                <t t-foreach="summary['category_summary']" t-as='category'>
+                    <line>
+                        <left><t t-esc='category' /></left>
+                        <right><t t-esc="widget.format_currency(category_value)"/> </right>
+                    </line>
+                </t>
+            </t>
+            <hr />
+            <t t-if="category_total_qty">
+                <line>
+                    <left>Total</left>
+                    <right><t t-esc="widget.format_currency_no_symbol(category_total_qty)"/> </right>
+                </line>
+                <br/>
+            </t>
+            <t t-if="payment_summary">
+                <h5>Payment Summary</h5>
+                <line>
+                    <left>Journal</left>
+                    <right>Amount</right>
+                </line>
+                 <line>
+                    <left>-----------------</left>
+                    <right>----------------</right>
+                </line>
+                <t t-foreach="summary['payment_summary']" t-as='payment'>
+                    <line>
+                        <left><t t-esc='payment' /></left>
+                        <right><t t-esc="widget.format_currency(payment_value)"/> </right>
+                    </line>
+                </t>
+                <hr />
+                <line>
+                    <left>Total</left>
+                    <right><t t-esc="widget.format_currency(payment_summary_total)"/></right>
+                </line>
+            </t>
+            <br/>
+            <t t-if="location_summary">
+                <h5>Location Summary</h5>
+                <br />
+                <t t-foreach="summary['location_summary']" t-as='location'>
+
+                    <line>
+                        <left><h5><b>Location </b></h5></left>
+                        <right><h5><t t-esc="location"/></h5></right>
+                    </line>
+                     <t t-set="total" t-value="0"/>
+                     <line>
+                        <left>Product</left>
+                        <right>Qty</right>
+                    </line>
+                    <line>
+                        <left>-----------------</left>
+                        <right>----------------</right>
+                    </line>
+                    <t t-foreach="location_value" t-as="value">
+                         <line>
+                            <left><t t-esc='value' /></left>
+                            <right><t t-esc="widget.format_currency_no_symbol(value_value)"/> </right>
+                         </line>
+                        <t t-set="total" t-value="value_value + total"/>
+                    </t>
+                    <hr />
+                    <line>
+                        <left>Total</left>
+                        <right><t t-esc="widget.format_currency_no_symbol(total)"/></right>
+                    </line>
+                    <br/>
+                </t>
+            </t>
+        </receipt>
+    </t>
+
+    <t t-name="popup_report_order_summary">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y"
+                 style="max-height: 600px;min-height: 300px;height: fit-content;">
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">
+                            Order Summary Report
+                        </h4>
+                        <div class="row">
+                            <label class="label checkbox-label">Current Session Report</label>
+                            <input type="checkbox" name="current_session_report" id="current_session_report" style="box-shadow:none;width: 20px;margin-top: -8px;"
+                                   class="popup_field">
+                                <span class="checkbox-material"><span class="check"></span></span>
+                            </input>
+                        </div>
+                        <div class="date_input_container">
+                            <div class="row">
+                                <span class='label voucher-label'><i class="fa fa-calendar"/> From Date</span>
+                                <input type="text" class="form-control datepicker popup_field input_required" name="from_date"/>
+                            </div>
+                            <div class="row">
+                                <span class='label voucher-label'><i class="fa fa-calendar"/> To Date</span>
+                                <input type="text" class="form-control datepicker popup_field input_required" name="to_date"/>
+                            </div>
+                            <div class="row">
+                                <label class="label checkbox-label">Order</label>
+                                <input type="checkbox" name="order_summary_report"
+                                       style="box-shadow:none;width: 20px;margin-top: -8px" class="popup_field">
+                                    <span class="checkbox-material"><span class="check"></span></span>
+                                </input>
+                            </div>
+                            <div class="row">
+                                <label class="label checkbox-label">Category</label>
+                                <input type="checkbox" name="category_summary_report"
+                                       style="box-shadow:none;width: 20px;margin-top: -8px" class="popup_field">
+                                    <span class="checkbox-material"><span class="check"></span></span>
+                                </input>
+                            </div>
+                            <div class="row">
+                                <label class="label checkbox-label">Payment</label>
+                                <input type="checkbox" name="payment_summary_report"
+                                       style="box-shadow:none;width: 20px;margin-top: -8px" class="popup_field">
+                                    <span class="checkbox-material"><span class="check"></span></span>
+                                </input>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <span class='label voucher-label'>States</span>
+                            <select class='form-control voucher-select popup_field input_required' name="state">
+                                <option value="" t-att-selected="widget.pos.config.report_order_summary_default_state == 'all' ? true : undefined">All</option>
+                                <option value="new" t-att-selected="widget.pos.config.report_order_summary_default_state === 'new' ? true : undefined">New</option>
+                                <option value="paid" t-att-selected="widget.pos.config.report_order_summary_default_state === 'paid' ? true : undefined">Paid</option>
+                                <option value="done" t-att-selected="widget.pos.config.report_order_summary_default_state === 'posted' ? true : undefined">Posted</option>
+                                <option value="invoiced" t-att-selected="widget.pos.config.report_order_summary_default_state === 'invoiced' ? true : undefined">Invoiced</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label class="label voucher-label">No.of Copies</label>
+                            <input type="number" class="form-control popup_field input_required" name="no_of_copies" t-att-value="widget.pos.config.report_no_of_report"/>
+                        </div>
+                        <span class="card-issue"/>
+                        <div class="form-footer text-right">
+                            <div class="btn btn-success pull-right confirm">
+                                Print <i class='fa fa-keyboard'/> (Enter)
+                            </div>
+                            <div class="btn btn-danger pull-left cancel">
+                                Close <i class='fa fa-keyboard'/> (ESC)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="report_order_summary_html">
+        <div class="pos-receipt">
+            <div class="pos-receipt-contact">
+                <h1>ORDERS SUMMARY REPORT</h1>
+            </div>
+            <t t-call="header_report"/>
+            <div class="pos-receipt-contact">
+                <h5>SALE ORDERS</h5>
+            </div>
+            <div class='orderlines'>
+                <t t-set="orders_total" t-value="0"/>
+                <t t-foreach="order_report" t-as="state">
+                    <div class="receipt-line">
+                        <span class="amount_total">
+                            <t t-esc="state"/>
+                        </span>
+                        <div>--------------------</div>
+                        <t t-foreach="order_report[state]" t-as="order">
+                            <div class="receipt-line">
+                                <span>
+                                    <t t-esc="order['order_date']"/>
+                                </span>
+                                <span class="pos-receipt-center-align">
+                                    <t t-esc="order['order_ref']"/>
+                                </span>
+                                <span class="pos-receipt-right-align">
+                                    <t t-esc="widget.format_currency(order['total'])"/>
+                                </span>
+                                <t t-set="orders_total" t-value="order['total'] + orders_total"/>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+                <div class="receipt-line">
+                    -----------------
+                    <span class="pos-receipt-right-align">
+                        -----------------
+                    </span>
+                </div>
+                <div class="receipt-line">
+                    <span class="amount_total">
+                        Total
+                    </span>
+                    <span class="pos-receipt-right-align amount_total">
+                        <t t-esc="widget.format_currency(orders_total)"/>
+                    </span>
+                </div>
+            </div>
+
+            <div class="pos-receipt-contact">
+                <h5>CATEGORIES DETAIL</h5>
+            </div>
+            <div class='orderlines'>
+                <t t-set="categories_total" t-value="0"/>
+                <t t-foreach="category_report" t-as="state">
+                    <div class="receipt-line">
+                        <span class="amount_total">
+                            State
+                        </span>
+                        <span class="pos-receipt-right-align">
+                            <t t-esc="state"/>
+                        </span>
+                        <div>--------------------</div>
+                        <t t-foreach="category_report[state]" t-as="category">
+                            <div class="receipt-line">
+                                <span>
+                                    <t t-esc="category"/>
+                                </span>
+                                <span class="pos-receipt-center-align">
+                                    <t t-esc="category_report[state][category][0]"/>
+                                </span>
+                                <span class="pos-receipt-right-align">
+                                    <t t-esc="widget.format_currency(category_report[state][category][1])"/>
+                                </span>
+                                <t t-set="categories_total" t-value="category_report[state][category][1] + categories_total"/>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+                <div class="receipt-line">
+                    -----------------
+                    <span class="pos-receipt-right-align">
+                        -----------------
+                    </span>
+                </div>
+                <div class="receipt-line">
+                    <span class="amount_total">
+                        Total
+                    </span>
+                    <span class="pos-receipt-right-align amount_total">
+                        <t t-esc="widget.format_currency(categories_total)"/>
+                    </span>
+                </div>
+            </div>
+
+            <div class="pos-receipt-contact">
+                <h5>PAYMENTS DETAIL</h5>
+            </div>
+            <div class='orderlines'>
+                <t t-set="payments_total" t-value="0"/>
+                <t t-foreach="payment_report" t-as="state">
+                    <div class="receipt-line">
+                        <span class="amount_total">
+                            State
+                        </span>
+                        <span class="pos-receipt-right-align">
+                            <t t-esc="state"/>
+                        </span>
+                        <div>--------------------</div>
+                        <t t-foreach="payment_report[state]" t-as="payment_method">
+                            <div class="receipt-line">
+                                <span>
+                                    <t t-esc="payment_method"/>
+                                </span>
+                                <span class="pos-receipt-right-align">
+                                    <t t-esc="widget.format_currency(payment_report[state][payment_method])"/>
+                                </span>
+                                <t t-set="payments_total" t-value="payment_report[state][payment_method] + payments_total"/>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+                <div class="receipt-line">
+                    -----------------
+                    <span class="pos-receipt-right-align">
+                        -----------------
+                    </span>
+                </div>
+                <div class="receipt-line">
+                    <span class="amount_total">
+                        Total
+                    </span>
+                    <span class="pos-receipt-right-align amount_total">
+                        <t t-esc="widget.format_currency(payments_total)"/>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </t>
+    
+    <t t-name="report_order_summary_xml">
+        <receipt align='center' width='40' value-thousands-separator='' >
+            <h5><t t-esc='pos.company.name' /></h5><br />
+            <t t-if="from_date and to_date">
+                <b>Start Date:</b><t t-esc="from_date" /><br/>
+                <b>End Date:</b><t t-esc="to_date" />
+                <br/><br/>
+            </t>
+            <t t-if="order_report">
+                <t t-if="widget.pos.state">
+                    <div><b>Order Summary</b></div>
+                    <line>
+                        <left><b>Order Ref</b></left>
+                        <right><b>Total</b></right>
+                    </line>
+                    <line>
+                        <left>-----------------</left>
+                        <right>----------------</right>
+                    </line>
+                    <t t-foreach="order_report" t-as="order">
+                        <line>
+                            <left><t t-esc="order.order_ref" /></left>
+                        </line>
+                        <line indent="1">
+                               <left font='b'><t t-esc="order.order_date" /></left>
+                               <right><t t-esc="widget.format_currency(order.total)" /></right>
+                        </line>
+                    </t>
+                </t>
+
+                <t t-if="!widget.pos.state">
+                    <div><b>Order Summary</b></div>
+                    <t t-foreach="order_report" t-as="order">
+                        <br /><div style="text-transform: capitalize;"><t t-esc="order" /></div>
+                        <line>
+                            <left><b>Order Ref</b></left>
+                            <right><b>Total</b></right>
+                        </line>
+                        <line>
+                            <left>-----------------</left>
+                            <right>----------------</right>
+                        </line>
+                        <t t-foreach="order_value" t-as="value">
+                            <line>
+                                <left><t t-esc="value_value.order_ref" /></left>
+                            </line>
+                            <line indent="1">
+                                <left font='b'><t t-esc="value_value.order_date" /></left>
+                                <right><t t-esc="widget.format_currency(value_value.total)" /></right>
+                            </line>
+                        </t>
+                     </t>
+                </t>
+            </t>
+             <br />
+            <t t-if="category_report">
+                <t t-if="widget.pos.state">
+                    <div><b>Category Summary</b></div>
+                    <line>
+                        <left><b>Category</b></left>
+                        <right><b>Total</b></right>
+                    </line>
+                    <line>
+                        <left>-----------------</left>
+                        <right>----------------</right>
+                    </line>
+                    <t t-foreach="category_report" t-as="category">
+                        <line>
+                            <left><t t-esc="category" /></left>
+                        </line>
+                        <line indent="1">
+                            <left>Qty : <t t-esc="category_value[0]" /></left>
+                            <right><t t-esc="widget.format_currency(category_value[1])" /></right>
+                        </line>
+                    </t><hr />
+                    <line>
+                        <left>Total</left>
+                        <right><t t-esc="widget.format_currency(widget.pos.total_categ_amount)" /></right>
+                    </line>
+                </t>
+                <t t-if="!widget.pos.state">
+                    <div><b>Category Summary</b></div>
+                    <t t-foreach="category_report" t-as="category">
+                        <br /><div style="text-transform: capitalize;"><t t-esc="category" /></div>
+                        <line>
+                            <left><b>Category</b></left>
+                            <right><b>Total</b></right>
+                        </line>
+                        <line>
+                            <left>-----------------</left>
+                            <right>----------------</right>
+                        </line>
+                        <t t-set="total" t-value="0"/>
+                        <t t-foreach="category_value" t-as="value">
+                            <line>
+                                <left><t t-esc="value" /></left>
+                            </line>
+                            <line indent="1">
+                                <left>Qty : <t t-esc="value_value[0]" /></left>
+                                <right><t t-esc="widget.format_currency(value_value[1])" /></right>
+                                <t t-set="total" t-value="value_value[1]+total"/>
+                            </line>
+                        </t><hr />
+                        <line>
+                            <left>Total</left>
+                            <right><t t-esc="widget.format_currency(total)"/></right>
+                        </line>
+                    </t>
+                </t>
+            </t>
+            <br />
+            <t t-if="payment_report">
+                <t t-if="widget.pos.state">
+                    <div><b>Payment Summary</b></div>
+                    <line>
+                        <left><b>Journal Name</b></left>
+                        <right><b>Amount</b></right>
+                    </line>
+                    <line>
+                        <left>-----------------</left>
+                        <right>----------------</right>
+                    </line>
+                    <t t-foreach="payment_report" t-as="payment">
+                        <line>
+                            <left><t t-esc="payment" /></left>
+                            <right><t t-esc="widget.format_currency(payment_value)" /></right>
+                        </line>
+                    </t><hr />
+                    <line>
+                        <left>Total</left>
+                        <right><t t-esc="widget.format_currency(widget.pos.total_amount)" /></right>
+                    </line>
+                </t>
+                <t t-if="!widget.pos.state">
+                    <div><b>Payment Summary</b></div>
+                     <t t-foreach="payment_report" t-as="payment">
+                        <br /><div style="text-transform: capitalize;"><t t-esc="payment" /></div>
+                        <line>
+                            <left><b>Journal Name</b></left>
+                            <right><b>Amount</b></right>
+                        </line>
+                        <line>
+                            <left>-----------------</left>
+                            <right>----------------</right>
+                        </line>
+                        <t t-set="total" t-value="0"/>
+                        <t t-foreach="payment_value" t-as="value">
+                            <line>
+                                <left><t t-esc="value" /></left>
+                                <right><t t-esc="widget.format_currency(value_value)" /></right>
+                                <t t-set="total" t-value="value_value+total"/>
+                            </line>
+                        </t><hr />
+                         <line>
+                            <left>Total</left>
+                            <right><t t-esc="widget.format_currency(total)"/></right>
+                         </line>
+                     </t>
+                </t>
+            </t>
+            <br />
+        </receipt>
+    </t>
+
+    <t t-name="popup_report_payment_summary">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y"
+                 style="max-height: 600px;min-height: 300px;height: fit-content;">
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">
+                            Payment Summary Report
+                        </h4>
+                        <div class="row">
+                            <label class="label checkbox-label">Current Session Report</label>
+                            <input type="checkbox" name="current_session_report" id="current_session_report" style="box-shadow:none;width: 20px;margin-top: -8px;"
+                                   class="popup_field">
+                                <span class="checkbox-material"><span class="check"></span></span>
+                            </input>
+                        </div>
+                        <div class="date_input_container">
+                            <div class="row">
+                                <span class='label voucher-label'><i class="fa fa-calendar"/> Start Date</span>
+                                <input type="text" class="form-control datepicker popup_field input_required" name="from_date"/>
+                            </div>
+                            <div class="row">
+                                <span class='label voucher-label'><i class="fa fa-calendar"/> To Date</span>
+                                <input type="text" class="form-control datepicker popup_field input_required" name="to_date"/>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <span class='label voucher-label'>Summary</span>
+                            <select class='form-control voucher-select popup_field input_required' name="summary">
+                                <option value="sales_person">Sales Persons</option>
+                                <option value="journals">Journals</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <label class="label voucher-label">No.of Copies</label>
+                            <input type="number" class="form-control popup_field" name="no_of_copies" t-att-value="widget.pos.config.report_no_of_report"/>
+                        </div>
+                        <span class="card-issue"/>
+                        <div class="form-footer text-right">
+                            <div class="btn btn-success pull-right confirm">
+                                Print <i class='fa fa-keyboard'/> (Enter)
+                            </div>
+                            <div class="btn btn-danger pull-left cancel">
+                                Close <i class='fa fa-keyboard'/> (ESC)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="report_payment_summary_receipt_html">
+        <div class="pos-receipt">
+            <div class="pos-receipt-contact">
+                <h1>PAYMENTS SUMMARY REPORT</h1>
+            </div>
+            <t t-call="header_report"/>
+            <t t-if="journal_details">
+                <div class="pos-receipt-contact">
+                    <h5>METHODS SUMMARY</h5>
+                </div>
+                <div class='orderlines'>
+                    <t t-foreach="journal_details" t-as="month">
+                        <div class="receipt-line">
+                             <div class="receipt-line">
+                                <t t-esc="month"/>
+                                <span class="pos-receipt-right-align">
+                                    -----------------
+                                </span>
+                            </div>
+                            <t t-set="total" t-value="0"/>
+                            <t t-foreach="journal_details[month]" t-as="payment">
+                                <div class="receipt-line">
+                                    <t t-esc="payment"/>
+                                    <span class="pos-receipt-right-align">
+                                        <t t-esc="widget.format_currency(journal_details[month][payment])"/>
+                                    </span>
+                                </div>
+                                <t t-set="total" t-value="journal_details[month][payment] + total"/>
+                            </t>
+                        </div>
+                        <div class="receipt-line">
+                            -----------------
+                            <span class="pos-receipt-right-align">
+                                -----------------
+                            </span>
+                        </div>
+                        <div class="receipt-line">
+                            <span class="amount_total">
+                                Total
+                            </span>
+                            <span class="pos-receipt-right-align amount_total">
+                                <t t-esc="widget.format_currency(total)"/>
+                            </span>
+                        </div>
+                    </t>
+                </div>
+            </t>
+
+            <t t-if="summary_data">
+                <div class="pos-receipt-contact">
+                    <h5>TOTAL SUMMARY</h5>
+                </div>
+                <div class='orderlines'>
+                    <t t-set="total_sum" t-value="0"/>
+                     <t t-foreach="summary_data" t-as="summary">
+                        <div class="receipt-line">
+                            <t t-esc="summary"/>
+                            <span class="pos-receipt-right-align">
+                                <t t-esc="widget.format_currency(summary_data[summary])"/>
+                            </span>
+                            <t t-set="total_sum" t-value="summary_data[summary] + total_sum"/>
+                        </div>
+                        <t t-set="total" t-value="value_value+total"/>
+                    </t>
+                    <div class="receipt-line">
+                        -----------------
+                        <span class="pos-receipt-right-align">
+                            -----------------
+                        </span>
+                    </div>
+                    <div class="receipt-line">
+                        <span class="amount_total">
+                            Total
+                        </span>
+                        <span class="pos-receipt-right-align amount_total">
+                            <t t-esc="widget.format_currency(total_sum)"/>
+                        </span>
+                    </div>
+                </div>
+            </t>
+            <t t-if="salesmen_details">
+                <div class="pos-receipt-contact">
+                    <h5>SALESMEN SUMMARY</h5>
+                </div>
+                <div class='orderlines'>
+                    <t t-set="total_sum" t-value="0"/>
+                    <t t-foreach="salesmen_details" t-as="seller">
+                        <div class="receipt-line">
+                            <span class="amount_total">
+                                <t t-esc="seller"/>
+                            </span>
+                        </div>
+                        <t t-foreach="salesmen_details[seller]" t-as="month">
+                            <div class="receipt-line">
+                                <t t-esc="month"/>
+                                <span class="pos-receipt-right-align">
+                                    -----------------
+                                </span>
+                            </div>
+                            <t t-foreach="salesmen_details[seller][month]" t-as="payment">
+                                <div class="receipt-line">
+                                    <span>
+                                        <t t-esc="payment"/>
+                                    </span>
+                                    <span class="pos-receipt-right-align">
+                                        <t t-esc="widget.format_currency(salesmen_details[seller][month][payment])"/>
+                                    </span>
+                                    <t t-set="total_sum" t-value="salesmen_details[seller][month][payment] + total_sum"/>
+                                </div>
+                            </t>
+                        </t>
+                    </t>
+                    <div class="receipt-line">
+                        -----------------
+                        <span class="pos-receipt-right-align">
+                            -----------------
+                        </span>
+                    </div>
+                    <div class="receipt-line">
+                        <span class="amount_total">
+                            Total
+                        </span>
+                        <span class="pos-receipt-right-align amount_total">
+                            <t t-esc="widget.format_currency(total_sum)"/>
+                        </span>
+                    </div>
+                </div>
+            </t>
+        </div>
+     </t>
+
+    <t t-name="report_payment_summary_receipt_xml">
+        <receipt align='center' width='40' value-thousands-separator='' >
+            <h5><t t-esc='pos.company.name' /></h5>
+            <br />
+            <t t-if="from_date and to_date">
+                <b>Start Date : </b><t t-esc="from_date" /><br/>
+                <b>End Date : </b><t t-esc="to_date" />
+            <br/><br/>
+            </t>
+            <t t-if="journal_details">
+                <h5>Journal Summary</h5>
+                <br />
+                <t t-foreach='journal_details' t-as='journal'>
+                     <h5 align="left"><b>Month : </b><t t-esc="journal"/></h5>
+                     <t t-set="total" t-value="0"/>
+                     <line>
+                        <left>Journal</left>
+                        <right>Amount</right>
+                    </line>
+                    <line>
+                        <left>-----------------</left>
+                        <right>----------------</right>
+                    </line>
+                    <t t-foreach="journal_value" t-as="value">
+                         <line>
+                            <left><t t-esc='value' /></left>
+                            <right><t t-esc="widget.format_currency(value_value)"/> </right>
+                         </line>
+                        <t t-set="total" t-value="value_value+total"/>
+                    </t>
+                    <hr />
+                    <line>
+                        <left>Total</left>
+                        <right><t t-esc="widget.format_currency(total)"/></right>
+                    </line>
+                    <br/>
+                </t>
+                <t t-if="total_summary">
+                    <h3 align="center">Total Summary</h3>
+                    <br/>
+                    <t t-set="total_sum" t-value="0"/>
+                    <line>
+                        <left>Journal</left>
+                        <right>Amount</right>
+                    </line>
+                    <line>
+                        <left>-----------------</left>
+                        <right>----------------</right>
+                    </line>
+                    <t t-foreach="summary_data" t-as="summary">
+                        <line>
+                            <left><t t-esc='summary' /></left>
+                            <right><t t-esc="widget.format_currency(summary_value)"/> </right>
+                        </line>
+                        <t t-set="total_sum" t-value="summary_value+total_sum"/>
+                    </t>
+                    <hr />
+                    <line>
+                        <left>Total</left>
+                        <right><t t-esc="widget.format_currency(total_sum)"/></right>
+                    </line>
+                    <br/>
+                </t>
+            </t>
+            <br/>
+            <t t-if="salesmen_details">
+                <h5>Payment Summary</h5>
+                <br />
+                <t t-foreach='salesmen_details' t-as='salesmen'>
+                    <h5 align="center"><b>Salesperson : </b><t t-esc="salesmen"/></h5>
+                    <br />
+                    <t t-foreach="salesmen_value" t-as="payment">
+                         <h5 align="left"><b>Month : </b><t t-esc="payment"/></h5>
+                        <br/>
+                         <t t-set="total" t-value="0"/>
+                         <line>
+                            <left>Journal</left>
+                            <right>Amount</right>
+                        </line>
+                        <line>
+                            <left>-----------------</left>
+                            <right>----------------</right>
+                        </line>
+                        <t t-foreach="payment_value" t-as="value">
+                             <line>
+                                <left><t t-esc='value' /></left>
+                                <right><t t-esc="widget.format_currency(value_value)"/> </right>
+                             </line>
+                            <t t-set="total" t-value="value_value+total"/>
+                        </t>
+                        <hr />
+                        <line>
+                            <left>Total</left>
+                            <right><t t-esc="widget.format_currency(total)"/></right>
+                        </line>
+                        <br/>
+                    </t>
+                </t>
+            </t>
+            <br/>
+        </receipt>
+    </t>
+
+    <t t-name="report">
+        <div class='receipt-screen screen'>
+            <div class='full_width screen-content'>
+                <div class='top-content'>
+                    <span class='button back'>
+                        Back
+                    </span>
+                    <span class="button next highlight">
+                        Next
+                    </span>
+                </div>
+                <div class="centered-content touch-scrollable report">
+                    <div class="button print">
+                        <i class="material-icons">print</i>
+                        Print
+                    </div>
+                    <div class="pos-receipt-container">
+                    </div>
+                    <div class="pos-receipt-container-fullsize">
+                    </div>
+                    <div class="email-receipt-container">
+                        <div class="card-content">
+                            <h4 class="card-title">Are you want sending Email with Image Receipt to ?</h4>
+                            <div class="row">
+                                <span>Subject</span>
+                                <t t-if="widget.options and widget.options.subject">
+                                    <input class="form-control name" name="name" t-att-value="widget.options.subject ? widget.options.subject : ''"/>
+                                </t>
+                                <t t-else="">
+                                    <input class="form-control name" name="name"/>
+                                </t>
+                            </div>
+                            <div class="row">
+                                <span>Email <t t-esc="this.email"/></span>
+                                <input class="form-control email" name="email">
+                                    <t t-esc="widget.email"/>
+                                </input>
+                            </div>
+                            <div class="row">
+                                <span>Body </span>
+                                <t t-if="widget.options and widget.options.body">
+                                    <textarea class="form-control body" name="body" t-att-value="widget.options.body ? widget.options.body : ''"/>
+                                </t>
+                                <t t-else="">
+                                    <textarea class="form-control body" name="body"/>
+                                </t>
+                            </div>
+                            <div class="row" style="width: 50%">
+                                <div class="btn btn-success pull-right send_email">
+                                    Send <i class="material-icons">email</i>
+                                </div>
+                            </div>
+                            <span class="email_result" style="color:blue"></span>
+                            <span class="email_issue" style="color: red"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

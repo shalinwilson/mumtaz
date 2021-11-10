@@ -1,0 +1,66 @@
+.launchpad-active > :not(#launchpad_overlay) {
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+}
+
+.launchpad-canvas {
+    height: auto;
+    margin: auto;
+}
+
+.launchpad-app-container {
+    display: inline-block;
+    background: $background;
+    border: 1px solid #ffffff;
+    border-top: 0px;
+    width: 100%;
+    float: left;
+    cursor: pointer;
+    min-height: 80px;
+    margin-bottom: 0px;
+    border-radius: 3px;
+}
+.launchpad-app-container:hover {
+    background: #6ec89b !important;
+}
+.launchpad-app-group-header {
+    color: #fff;
+    margin: 10px 0 10px 30px;
+}
+
+.launchpad-app-label {
+    max-width: 100%;
+    min-height: 2em;
+    text-align: center !important;
+    color: black;
+    font-size: 13px;
+    line-height: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 5px;
+    font-weight: 400;
+}
+.launchpad-app-icon {
+    width: 100%;
+    height: 1.5em;
+    font-size: 13px;
+    margin: auto;
+    margin-top: 5px;
+}
+.launchpad-app-icon .material-icons {
+    color: black;
+}
+.launchpad-app-icon .fa {
+    color: #fff;
+    font-size: 16px !important;
+}
+.launchpad-app-icon img {
+    width: 20px;
+    height: 20px;
+    margin: auto;
+    vertical-align: bottom;
+    display: block;
+}

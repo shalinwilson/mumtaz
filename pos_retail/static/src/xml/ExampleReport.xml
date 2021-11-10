@@ -1,0 +1,77 @@
+<t t-name="SaleDetailsReport">
+    <div class="pos-receipt">
+        <t t-if='pos.company_logo_base64'>
+            <img class="pos-receipt-logo" t-att-src='pos.company_logo_base64' alt="Logo"/>
+            <br/>
+        </t>
+        <t t-if='!pos.company_logo_base64' class="pos-receipt-center-align">
+            <h1 t-esc='company.name'/>
+            <br/>
+        </t>
+        <br/>
+        <br/>
+
+        <!-- Orderlines -->
+
+        <div class='orderlines'>
+            <t t-foreach='products' t-as='line'>
+                <div>
+                    <t t-esc='line.product_name.substr(0,20)'/>
+                    <span class="pos-receipt-right-align">
+                        <t t-esc='Math.round(line.quantity * Math.pow(10, pos.dp["Product Unit of Measure"])) / Math.pow(10, pos.dp["Product Unit of Measure"])'/>
+                        <t t-if='line.uom !== "Units"'>
+                            <t t-esc='line.uom'/>
+                        </t>
+                        x
+                        <t t-esc='widget.format_currency_no_symbol(line.price_unit)'/>
+                    </span>
+                </div>
+                <t t-if='line.discount !== 0'>
+                    <div class="pos-receipt-left-padding">Discount:<t t-esc='line.discount'/>%
+                    </div>
+                </t>
+            </t>
+        </div>
+
+        <br/>
+        <div>------------------------</div>
+        <br/>
+
+        <div>
+            Payments:
+        </div>
+        <div t-foreach='payments' t-as='payment'>
+            <t t-esc='payment.name'/>
+            <span t-esc='widget.format_currency_no_symbol(payment.total)' class="pos-receipt-right-align"/>
+        </div>
+
+        <br/>
+        <div>------------------------</div>
+        <br/>
+
+        <div>
+            Taxes:
+        </div>
+        <div t-foreach='taxes' t-as='taxe'>
+            <t t-esc='taxe.name'/>
+            <span t-esc='widget.format_currency_no_symbol(taxe.tax_amount)' class="pos-receipt-right-align"/>
+        </div>
+
+        <br/>
+        <div>------------------------</div>
+        <br/>
+
+        <div>
+            Total:
+            <span t-esc='widget.format_currency_no_symbol(total_paid)' class="pos-receipt-right-align"/>
+        </div>
+
+        <br/>
+        <div class="pos-receipt-order-data">
+            <div>
+                <t t-esc='date'/>
+            </div>
+        </div>
+
+    </div>
+</t>

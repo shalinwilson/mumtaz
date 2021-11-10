@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="Chrome">
+        <t t-jquery="h1[class='message']" t-operation="before">
+            <img src="/pos_retail/static/description/app_logo.png" alt="TL Technology" height="70" width="70" style="border-radius: 65%"/>
+        </t>
+    </t>
+
+<!--    <t t-name="hide_pos_branding_widget">-->
+<!--        <div class="oe_status js_synch" style="max-width: 20px;margin-left: -5px">-->
+<!--            <span class='js_msg oe_hidden'>0</span>-->
+<!--            <div class="js_connected oe_icon">-->
+<!--                <i style="color: #ff3d00" class='fa fa-fw fa-angle-double-left' role="img" aria-label="Hide Branding" title="Hide Branding"></i>-->
+<!--            </div>-->
+<!--            <div class="js_connecting oe_icon oe_hidden">-->
+<!--                <i style="color: rgb(94, 185, 55)" class='fa fa-fw fa-angle-double-right' role="img" aria-label="Show Branding" title="Show Branding"></i>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </t>-->
+
+</templates>

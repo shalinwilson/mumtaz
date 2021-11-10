@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="button_remove_orders">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/trash.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Remove Orders
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="button_sync_selected_order">
+        <div class="launchpad-app-container highlight">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/sync.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Sync Orders
+                </div>
+            </a>
+        </div>
+    </t>
+
+</templates>

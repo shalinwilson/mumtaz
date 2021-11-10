@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+
+        <record id="view_pos_session_form" model="ir.ui.view">
+            <field name="name">pos.session.form.view</field>
+            <field name="model">pos.session</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='stop_at']" position="after">
+                    <field name="cash_journal_id" readonly="1"/>
+                    <field name="cash_register_id" readonly="1"/>
+                    <field name="required_reinstall_cache" groups="point_of_sale.group_pos_manager"/>
+                    <field name="mobile_responsive" groups="point_of_sale.group_pos_manager"/>
+                    <field name="pos_branch_id" groups="pos_retail.group_branch_manager"/>
+                    <field name="lock_state" groups="point_of_sale.group_pos_manager"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="statements" string="Bank Statements">
+                        <group>
+                            <field name="statement_ids" colspan="4" nolabel="4" readonly="1"/>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//field[@name='cash_control']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_pos_session_tree" model="ir.ui.view">
+            <field name="name">pos.session.tree.view</field>
+            <field name="model">pos.session</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_session_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='config_id']" position="after">
+                    <field name="pos_branch_id" groups="pos_retail.group_branch_manager" optional="hide"/>
+                    <field name="mobile_responsive" optional="hide"/>
+                    <field name="lock_state" optional="hide"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

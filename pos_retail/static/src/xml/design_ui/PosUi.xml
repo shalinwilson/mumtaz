@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<!--    <t t-extend="Chrome">-->
+<!--        <t t-jquery="div[class*='pos-rightheader']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">pos-rightheader</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('pos-rightheader')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="div[class*='pos-topheader']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">pos-topheader</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('pos-topheader')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="div[class*='pos-content']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">pos-content</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('pos-content')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="div[class*='pos-branding']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">pos-branding</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('pos-branding')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+<!--    <t t-extend="NumpadWidget">-->
+<!--        <t t-jquery="div[class*='numpad']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">numpad</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('numpad')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="button[class*='input-button']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">input-button</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('input-button')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="button[class*='mode-button']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">mode-button</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('mode-button')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+<!--    <t t-extend="ActionpadWidget">-->
+<!--        <t t-jquery="button[t-attf-class*='set-customer']" t-operation="replace">-->
+<!--            <div t-attf-class='button set-customer #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }' data-tag="set-customer" t-att-style="widget.pos._get_style_by_element_tag('set-customer')">-->
+<!--                <span class="customer-name" data-tag="customer-name" t-att-style="widget.pos._get_style_by_element_tag('customer-name')">-->
+<!--                    <t t-if="widget.pos.get_client()">-->
+<!--                        <t t-esc="widget.pos.get_client().name" />-->
+<!--                    </t>-->
+<!--                    <t t-if="!widget.pos.get_client()">-->
+<!--                        Set Customer-->
+<!--                    </t>-->
+<!--                </span>-->
+<!--            </div>-->
+<!--            <t t-if="widget.pos.config.pos_orders_management">-->
+<!--                <button class="btn btn-default btn-round btn-just-icon find-order" style="margin-top: 5px">-->
+<!--                  <i class="material-icons">search</i>-->
+<!--                </button>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--        <t t-jquery="button[class*='pay']" t-operation="replace">-->
+<!--            <t t-if="widget.pos.config.allow_payment">-->
+<!--                <div class='button pay' data-tag="pay" t-att-style="widget.pos._get_style_by_element_tag('pay')">-->
+<!--                    <span class="customer-name">-->
+<!--                        Payment-->
+<!--                    </span>-->
+<!--                </div>-->
+<!--            </t>-->
+<!--            <t t-if="widget.pos.config.quickly_payment_full">-->
+<!--                <button class='button quickly_paid'>-->
+<!--                    <span class="customer-name">Payment Full</span>-->
+<!--                </button>-->
+<!--            </t>-->
+<!--        </t>-->
+<!--        <t t-jquery="div[class*='find_customer']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">find_customer</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('find_customer')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+<!--    <t t-extend="OrderWidget">-->
+<!--        <t t-jquery="div[class*='summary']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">summary</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('summary')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="table[class*='header_order']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">header_order</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('header_order')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+    <t t-extend="PaymentScreenWidget">
+        <t t-jquery="div[class*='paymentmethods-container']" t-operation="attributes">
+            <attribute name="data-tag">paymentmethods-container</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('paymentmethods-container')</attribute>
+        </t>
+        <t t-jquery="span[class*='back']" t-operation="attributes">
+            <attribute name="data-tag">back</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('back')</attribute>
+        </t>
+        <t t-jquery="span[class*='next']" t-operation="attributes">
+            <attribute name="data-tag">next</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('next')</attribute>
+        </t>
+        <t t-jquery="div[class*='left-content']" t-operation="attributes">
+            <attribute name="data-tag">left-content</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('left-content')</attribute>
+        </t>
+        <t t-jquery="div[class*='right-content']" t-operation="attributes">
+            <attribute name="data-tag">right-content</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('right-content')</attribute>
+        </t>
+        <t t-jquery="div[class*='payment-buttons']" t-operation="attributes">
+            <attribute name="data-tag">payment-buttons</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('payment-buttons')</attribute>
+        </t>
+    </t>
+
+    <t t-extend="PaymentScreen-Paymentlines">
+        <t t-jquery="div[class*='total']" t-operation="attributes">
+            <attribute name="data-tag">total</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('total')</attribute>
+        </t>
+    </t>
+
+    <t t-extend="PaymentScreen-Paymentmethods">
+        <t t-jquery="div[class*='paymentmethod']" t-operation="attributes">
+            <attribute name="data-tag">paymentmethod</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('paymentmethod')</attribute>
+        </t>
+    </t>
+
+<!--    <t t-extend="ProductListWidget">-->
+<!--        <t t-jquery="div[class*='product-list-container']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">product-list-container</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('product-list-container')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="div[class*='rightpane']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">rightpane</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('rightpane')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="div[class*='control-buttons']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">control-buttons</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('control-buttons')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="div[class*='control-button']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">control-button</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('control-button')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+<!--    <t t-extend="ProductCategoriesWidget">-->
+<!--        <t t-jquery="div[class*='breadcrumbs']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">breadcrumbs</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('breadcrumbs')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="div[class*='searchbox']" t-operation="attributes">-->
+<!--            <attribute name="class">searchbox search-product</attribute>-->
+<!--            <attribute name="data-tag">search-product</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('search-product')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="div[class*='categories']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">categories</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('categories')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="header[class*='rightpane-header']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">rightpane-header</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('rightpane-header')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+<!--    <t t-extend="CategorySimpleButton">-->
+<!--        <t t-jquery="span[class*='category-simple-button']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">category-simple-button</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('category-simple-button')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+<!--    <t t-extend="ClientListScreenWidget">-->
+<!--        <t t-jquery="span[class*='searchbox']" t-operation="attributes">-->
+<!--            <attribute name="class">searchbox search-partner</attribute>-->
+<!--            <attribute name="data-tag">search-partner</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('search-partner')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="span[class*='new-customer']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">new-customer</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('new-customer')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="section[class*='top-content']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">top-content</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('top-content')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="section[class*='full-content']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">full-content</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('full-content')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="span[class*='back']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">back</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('back')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="span[class*='next']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">next</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('next')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="span[class*='new-customer']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">new-customer</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('new-customer')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+<!--    <t t-extend="ClientDetails">-->
+<!--        <t t-jquery="div[class*='client-picture']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">client-picture</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('client-picture')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="section[class*='client-details']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">client-details</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('client-details')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="span[class*='label']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">label</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('label')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="span[class*='detail']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">detail</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('detail')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="div[class*='client-name']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">client-name</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('client-name')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+<!--    <t t-extend="PaymentScreen-Numpad">-->
+<!--        <t t-jquery="button[class*='input-button']" t-operation="attributes">-->
+<!--            <attribute name="class">input-button number-char payment-input-button</attribute>-->
+<!--            <attribute name="data-tag">payment-input-button</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('paymen-input-button')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="button[class*='mode-button']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">payment-mode-button</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('payment-mode-button')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+    <t t-extend="Product">
+        <t t-jquery="article[class*='product']" t-operation="attributes">
+            <attribute name="data-tag">product-box</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('product-box')</attribute>
+        </t>
+        <t t-jquery="span[class*='price-tag']" t-operation="attributes">
+            <attribute name="data-tag">price-tag</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('price-tag')</attribute>
+        </t>
+        <t t-jquery="div[class*='product-img']" t-operation="attributes">
+            <attribute name="data-tag">product-img</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('product-img')</attribute>
+        </t>
+        <t t-jquery="div[class*='product-name']" t-operation="attributes">
+            <attribute name="class">product-name box-product-name</attribute>
+            <attribute name="data-tag">box-product-name</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('box-product-name')</attribute>
+        </t>
+    </t>
+
+<!--    <t t-extend="CategoryButton">-->
+<!--        <t t-jquery="span[class*='category-button']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">category-button</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('category-button')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="div[class*='category-name']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">category-name</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('category-name')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+    <t t-extend="ProductScreenWidget">
+        <t t-jquery="div[class*='leftpane']" t-operation="attributes">
+            <attribute name="data-tag">leftpane</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('leftpane')</attribute>
+        </t>
+        <t t-jquery="div[class*='rightpane']" t-operation="attributes">
+            <attribute name="data-tag">rightpane</attribute>
+            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('rightpane')</attribute>
+        </t>
+    </t>
+
+<!--    <t t-extend="Orderline">-->
+<!--        <t t-jquery="li[t-attf-class*='orderline']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">orderline</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('orderline')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="span[class*='qty']" t-operation="attributes">-->
+<!--            <attribute name="class">qty orderline-qty</attribute>-->
+<!--            <attribute name="data-tag">orderline-qty</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('orderline-qty')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="span[class*='price']" t-operation="attributes">-->
+<!--            <attribute name="class">price orderline-price</attribute>-->
+<!--            <attribute name="data-tag">orderline-price</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('orderline-price')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="span[class*='product-name']" t-operation="attributes">-->
+<!--            <attribute name="class">product-name orderline-product-name</attribute>-->
+<!--            <attribute name="data-tag">orderline-product-name</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('orderline-product-name')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+<!--    <t t-extend="OrderSelectorWidget">-->
+<!--        <t t-jquery="div[class*='order-selector']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">order-selector</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('order-selector')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="span[class*='neworder-button']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">neworder-button</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('neworder-button')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="span[class*='deleteorder-button']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">deleteorder-button</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('deleteorder-button')</attribute>-->
+<!--        </t>-->
+<!--        <t t-jquery="span[class*='order-button']" t-operation="attributes">-->
+<!--            <attribute name="data-tag">order-button</attribute>-->
+<!--            <attribute name="t-att-style">widget.pos._get_style_by_element_tag('order-button')</attribute>-->
+<!--        </t>-->
+<!--    </t>-->
+
+    <t t-name="DesignUiButtonWidget">
+        <div class="oe_status js_synch" title="Click Active Design Tool">
+            <div class="js_connected oe_icon oe_green">
+                <i class='fa fa-fw fa-crop' role="img" aria-label="Click Active Design Tool" title="Click Active Design Tool"></i>
+            </div>
+            <div class="js_disconnected oe_hidden oe_icon oe_green" style="width: 150px; font-size: 13px; color: #fff">
+                <span class="button"><i class="fa fa-save"/><span class="js_msg oe_hidden"></span></span>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="UndoDesignUiButtonWidget">
+        <div class="oe_status js_synch" title="Print Bill">
+            <div class="js_connected oe_icon oe_green">
+                <i class='fa fa-fw fa-undo' role="img" aria-label="Remove All Design and Back to Default Theme" title="Remove All Design and Back to Default Theme"></i>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="DesignFormWidget">
+        <div class="debug-widget design-widget oe_hidden">
+            <h1>Design Form</h1>
+            <div class="toggle" title="Dismiss" role="img" aria-label="Dismiss"><i class='fa fa-times' /></div>
+            <div class="content">
+                <ul>
+                    <p class="category">BackGround Color</p>
+                    <li><input type="color" id="background" class="background" t-att-value="widget.style_element_selected['background'] or ''"/></li>
+                    <p class="category">Text Color</p>
+                    <li><input type="color" id="color" class="color" t-att-value="widget.style_element_selected['color'] or ''"></input></li>
+                    <p class="category">Font Size (Suggest from 12 to 20)</p>
+                    <li><input type="number" id="font-size" class="font-size" t-att-value="widget.style_element_selected['fontsize'] or 14"/></li>
+                    <p class="category">Line Height (Suggest from 10 to 20)</p>
+                    <li><input type="number" id="line-height" class="line-height" t-att-value="widget.style_element_selected['lineheight'] or 10"/></li>
+                    <p class="category">Font Weight (Suggest from 400 to 900)</p>
+                    <li><input type="number" id="font-weight" class="font-weight" t-att-value="widget.style_element_selected['fontweight'] or 400"/></li>
+                    <p class="category">Text Padding (Suggest from 5 to 10)</p>
+                    <li><input type="number" id="padding" class="padding" t-att-value="widget.style_element_selected['padding'] or 5"/></li>
+                    <p class="category">Box Margin (Suggest from 5 to 10)</p>
+                    <li><input type="number" id="margin" class="margin" t-att-value="widget.style_element_selected['margin'] or 5"/></li>
+                    <p class="category">Border Radius (Suggest from 3 to 20)</p>
+                    <li><input type="number" id="border-radius" class="border-radius" t-att-value="widget.style_element_selected['borderradius'] or 3"/></li>
+                    <p class="category">Text Align</p>
+                    <li>
+                        <select class='form-control detail text-align' id="text-align">
+                            <option value='center' t-att-selected="widget.style_element_selected['textalign'] == 'center' ? true : undefined">Center</option>
+                            <option value='left' t-att-selected="widget.style_element_selected['textalign'] == 'left' ? true : undefined">Left</option>
+                            <option value='right' t-att-selected="widget.style_element_selected['textalign'] == 'right' ? true : undefined">Right</option>
+                        </select>
+                    </li>
+                    <p class="category">Display</p>
+                    <li>
+                        <select class='form-control detail display' id="display">
+                            <option value='inline-block'>Inline Block</option>
+                            <option value='none'>Hidden</option>
+                        </select>
+                    </li>
+                    <p class="category"></p>
+                    <div class="form-footer text-center" style="margin-left: 0px">
+                        <span class="btn btn-success confirm"><i class="fa fa-check"/> Apply Change</span>
+                        <span class="btn btn-danger save"><i class="fa fa-save"/> Save All</span>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </t>
+
+</templates>

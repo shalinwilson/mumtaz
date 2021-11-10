@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="PopUpModifierBundlePack">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y" style="width: 85%; min-height: 600px">
+                <div class="card">
+                    <p class="title"><t t-esc=" widget.options.title || 'Alert' " /></p>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="table combo_items">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <span class="card-issue"/>
+                <div class="form-footer text-center">
+                    <div class="btn btn-success pull-right confirm">
+                        Confirm <i class='fa fa-keyboard'/> (Enter)
+                    </div>
+                    <div class="btn btn-danger pull-left cancel">
+                        Close <i class='fa fa-keyboard'/> (ESC)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="ComboItems">
+        <t t-foreach="combo_items" t-as="combo">
+            <t t-call="ComboItem"/>
+        </t>
+    </t>
+
+    <t t-name="ComboItem">
+        <article class="product" t-att-data-combo-id="combo.id" tabindex="0" t-attf-aria-labelledby="article_product_#{combo.id}">
+            <span class="btn btn-danger minus">
+                <i class="fa fa-minus"/>
+            </span>
+            <span class="btn btn-danger trash">
+                <i class="fa fa-trash"/>
+            </span>
+            <span class="btn btn-success plus">
+                <i class="fa fa-plus"/>
+            </span>
+            <div class="combo-item-product-img-big">
+                <img class='combo-item-product_list_image' t-att-src='widget.get_product_image_url(combo.id)'/>
+            </div>
+            <span class="combo-item-price-tag">
+                <t t-esc="widget.format_currency(widget.format_currency(combo.combo_price), 'Product Price')"/>
+            </span>
+            <div class="product-name">
+                <t t-esc="combo.product_id[1]"/>
+            </div>
+            <div class="combo-item-cart_qty">
+                <t t-if="combo.quantity">
+                    <t t-esc="combo.quantity"/>
+                </t>
+                <t t-if="!combo.quantity">
+                    0
+                </t>
+            </div>
+        </article>
+    </t>
+
+</templates>

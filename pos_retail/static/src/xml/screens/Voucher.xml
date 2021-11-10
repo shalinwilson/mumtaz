@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="PopUpPrintVoucher">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y">
+                <div class="card">
+                    <div class="card-content">
+                        <h4 class="card-title">
+                            <t t-if="widget.options">
+                                <t t-esc="widget.options.title"/>
+                            </t>
+                        </h4>
+                        <div class="client-details-box clearfix">
+                            <div class="client-details-left">
+                                <div class="row">
+                                    <span class='label voucher-label'>Card number</span>
+                                    <t t-if="widget.selected_line">
+                                        <t t-if="widget.selected_line.voucher">
+                                            <input class="form-control field input_required"
+                                                   name="number"
+                                                   t-att-value="widget.selected_line.voucher ? widget.selected_line.voucher.number : ''"
+                                                   type="text"
+                                                   required="true"/>
+                                        </t>
+                                        <t t-else="">
+                                            <input class="form-control field input_required"
+                                                   name="number"
+                                                   t-att-value="widget.selected_line.uid"
+                                                   type="text"
+                                                   required="true"/>
+                                        </t>
+                                    </t>
+                                    <t t-else="">
+                                        <input class="form-control field input_required"
+                                               name="number"
+                                               t-att-value="widget.options.number"
+                                               type="text"
+                                               required="true"/>
+                                    </t>
+                                </div>
+                                <div class="row">
+                                    <span class='label voucher-label'>Period days</span>
+                                    <t t-if="widget.selected_line">
+                                        <input class="form-control field input_required"
+                                               type="number"
+                                               name="period_days"
+                                               t-att-value="widget.selected_line.voucher ? widget.selected_line.voucher.period_days : widget.pos.config.expired_days_voucher"
+                                               required="true"/>
+                                    </t>
+                                    <t t-else="">
+                                        <input class="form-control field input_required"
+                                               type="number"
+                                               t-att-value="widget.pos.config.expired_days_voucher"
+                                               name="period_days"
+                                               required="true"/>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="client-details-right">
+                                <t t-if="widget.selected_line and widget.selected_line.voucher">
+                                    <div class="row">
+                                        <span class='label voucher-label'>Type of Voucher</span>
+                                        <select class='form-control field input_required' name="apply_type">
+                                            <option value="fixed_amount"
+                                                    t-att-selected="widget.selected_line.voucher['apply_type'] ? ((widget.selected_line.voucher['apply_type'] === 'fixed_amount') ? true : undefined) : undefined">Fixed amount</option>
+                                            <option value="percent"
+                                                    t-att-selected="widget.selected_line.voucher['apply_type'] ? ((widget.selected_line.voucher['apply_type'] === 'percent') ? true : undefined) : undefined">Percent (%)</option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <span class='label voucher-label'>Apply to</span>
+                                        <select class='form-control field input_required' name="method">
+                                            <option value="general"
+                                                    t-att-selected="widget.selected_line.voucher['method'] ? ((widget.selected_line.voucher['method'] === 'general') ? true : undefined) : undefined">All Customers</option>
+                                            <option value="special_customer"
+                                                    t-att-selected="widget.selected_line.voucher['method'] ? ((widget.selected_line.voucher['method'] === 'special_customer') ? true : undefined) : undefined">Special Customer</option>
+                                        </select>
+                                    </div>
+                                </t>
+                                <t t-else="">
+                                    <div class="row">
+                                        <span class='label voucher-label'>Type of Voucher</span>
+                                        <select class='form-control field input_required' name="apply_type">
+                                            <option value="fixed_amount">Fixed amount</option>
+                                            <option value="percent">Percent (%)</option>
+                                        </select>
+                                    </div>
+                                    <div class="row">
+                                        <span class='label voucher-label'>Apply to</span>
+                                        <select class='form-control field input_required' name="method">
+                                            <option value="general">All Customers</option>
+                                            <option value="special_customer">Special Customer</option>
+                                        </select>
+                                    </div>
+                                </t>
+                                <div class="row">
+                                    <span class='label voucher-label'>Amount (or %)</span>
+                                    <t t-if="widget.selected_line and widget.selected_line.voucher">
+                                        <input class="form-control field input_required"
+                                               t-att-value="widget.selected_line.voucher.value"
+                                               type="number"
+                                               name="value"/>
+                                    </t>
+                                    <t t-if="widget.selected_line and !widget.selected_line.voucher">
+                                        <input class="form-control field input_required"
+                                               t-att-value="widget.selected_line.get_price_with_tax()"
+                                               type="number"
+                                               name="value"/>
+                                    </t>
+                                    <t t-if="!widget.selected_line">
+                                        <input class="form-control field input_required"
+                                               type="number"
+                                               t-att-value="widget.options.value"
+                                               name="value"/>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="card-issue"/>
+                        <div class="form-footer text-center">
+                            <div class="btn btn-success pull-right confirm">
+                                <i class="fa fa-save"/>
+                                Save
+                                <i class='fa fa-keyboard'/>
+                                (Enter)
+                            </div>
+                            <div class="btn btn-danger pull-left cancel">
+                                Remove Voucher <i class='fa fa-keyboard'/>
+                                (Esc)
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="VoucherCard">
+        <div class="pos-receipt">
+            <t t-if='company.logo'>
+                <t t-if="pos.company_logo_base64">
+                    <div class="receipt-logo-header">
+                        <img t-att-src='pos.company_logo_base64' class="pos-receipt-logo"/>
+                    </div>
+                </t>
+            </t>
+            <t t-if='!company.logo'>
+                <h1 class="pos-receipt-center-align">
+                    <t t-esc='company.name' />
+                </h1>
+            </t>
+            <h1 class="pos-receipt-center-align">
+                <t t-esc='voucher.number' />
+            </h1>
+            <div class="pos-receipt-contact">
+                <t t-if='company'>
+                    <div class="pos-receipt-center-align">
+                        <t t-esc="company.contact_address"/>
+                    </div>
+                    <t t-if="company.phone">
+                        <div class="receipt-line">
+                            <span>Phone</span>
+                            <span class="pos-receipt-right-align">
+                                <t t-esc="company.phone"/>
+                            </span>
+                        </div>
+                    </t>
+                    <t t-if="company.email">
+                        <div class="receipt-line">
+                            <span>Email</span>
+                            <span class="pos-receipt-right-align">
+                                <t t-esc="company.email"/>
+                            </span>
+                        </div>
+                    </t>
+                    <t t-if="company.website">
+                        <div class="receipt-line">
+                            <span>Website</span>
+                            <span class="pos-receipt-right-align">
+                                <t t-esc="company.website"/>
+                            </span>
+                        </div>
+                    </t>
+                </t>
+                <t t-if='cashier'>
+                    <div class="receipt-line">
+                        <span>Created by</span>
+                        <span class="pos-receipt-right-align">
+                            <t t-esc="cashier.name"/>
+                        </span>
+                    </div>
+                </t>
+                <t t-if='voucher.partner_name'>
+                    <div class="receipt-line">
+                        <span>Customer</span>
+                        <span class="pos-receipt-right-align">
+                            <t t-esc="voucher.partner_name"/>
+                        </span>
+                    </div>
+                </t>
+                <div class="receipt-line">
+                    <div>Please keep Your Secret Voucher Code Safe</div>
+                </div>
+                <br/>
+                <div class="barcode">
+                    <img id="barcode" class="footer_barcode"
+                         t-att-src="voucher.url_barcode"
+                    />
+                </div>
+                <br/>
+                <t t-if="voucher.apply_type">
+                    <div class="receipt-line">
+                        <span>Voucher Amount :</span>
+                        <span class="pos-receipt-right-align">
+                            <t t-if="voucher.apply_type == 'fixed_amount'">
+                                <t t-esc="pos.gui.chrome.format_currency(voucher.value)"/>
+                            </t>
+                            <t t-if="voucher.apply_type == 'percent'">
+                                <t t-esc="voucher.value"/>
+                                (%)
+                            </t>
+                        </span>
+                    </div>
+                </t>
+                <t t-if="voucher.method">
+                    <div class="receipt-line">
+                        <span>Method can Use :</span>
+                        <span class="pos-receipt-right-align">
+                            <t t-if="voucher.method == 'general'">
+                                Anybody Can Use
+                            </t>
+                            <t t-if="voucher.method == 'special_customer'">
+                                Only You can Use
+                            </t>
+                        </span>
+                    </div>
+                </t>
+                <t t-if="voucher.end_date">
+                    <div class="receipt-line">
+                        <span>Expired Date :</span>
+                        <span class="pos-receipt-right-align">
+                            <t t-esc='voucher.end_date'/>
+                        </span>
+                    </div>
+                </t>
+            </div>
+            <h1 class="pos-receipt-center-align">
+                Thanks You
+            </h1>
+        </div>
+    </t>
+
+    <t t-name="ButtonPrintVoucher">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/printer.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Create Voucher Manual
+                </div>
+            </a>
+        </div>
+    </t>
+
+</templates>

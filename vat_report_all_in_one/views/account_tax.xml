@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_tax_form_show_on_both" model="ir.ui.view">
+        <field name="name">account.tax.form.show.on.both</field>
+        <field name="model">account.tax</field>
+        <field name="inherit_id" ref="account.view_tax_form"/>
+        <field name="arch" type="xml">
+            <field name="type_tax_use" position="after">
+                <field name="show_on_both"/>
+            </field>
+            <xpath expr="//sheet/group/group[2]/div/field[@name='amount']" position="attributes">
+                <attribute name="attrs">{'invisible': [('show_on_both', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//sheet/group/group[2]/div/field[@name='amount']" position="after">
+                <field name="reverse_amount" attrs="{'invisible': [('show_on_both', '=', False)]}" class="oe_inline"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

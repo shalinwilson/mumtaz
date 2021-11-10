@@ -1,0 +1,108 @@
+.pos .ribbon {
+  position: initial;
+  left: -5px;
+  top: -5px;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px;
+  text-align: right;
+}
+
+.pos .ribbon .out_stock span {
+  background: $primary_color !important;
+}
+
+.pos .ribbon .limit_stock span {
+  background: orange !important;
+}
+
+.pos .ribbon span {
+  background: $secondary_color;
+  color: #ffffff;
+  text-align: center;
+  height: 30px;
+  left: 0px;
+  padding-left: 5px;
+  text-transform: uppercase;
+  line-height: 30px;
+  font-size: 13px;
+  display: block;
+  position: absolute;
+  top: 0px;
+  font-weight: 500;
+}
+
+.pos .ribbon span::before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 100%;
+  z-index: -1;
+  border-left: 3px solid $primary_color;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid $primary_color;
+}
+
+.pos .ribbon span::after {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 100%;
+  z-index: -1;
+  border-left: 3px solid transparent;
+  border-right: 3px solid $primary_color;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid $primary_color;
+}
+
+//-----------------------
+
+.pos .trial {
+  position: initial;
+  left: -5px;
+  top: -5px;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px;
+  text-align: right;
+}
+
+.pos .trial span {
+  background: #eaeaea;
+  text-align: center;
+  width: 100%;
+  color: blue;
+  bottom: 0px;
+  font-size: 18px;
+  display: block;
+  position: absolute;
+  font-weight: 400;
+  line-height: 50px;
+  height: 45px;
+  cursor: pointer;
+}
+
+.pos .trial span::before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 100%;
+  z-index: -1;
+  border-left: 3px solid $primary_color;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid $primary_color;
+}
+
+.pos .trial span::after {
+  content: "";
+  position: absolute;
+  right: 0px;
+  top: 100%;
+  z-index: -1;
+  border-left: 3px solid transparent;
+  border-right: 3px solid $primary_color;
+  border-bottom: 3px solid transparent;
+  border-top: 3px solid $primary_color;
+}

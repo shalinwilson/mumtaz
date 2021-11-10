@@ -1,0 +1,182 @@
+$gray: #52575C;
+$gray-light: lighten(#000, 46.7%); // #777
+$gray-lighter: lighten(#000, 93.5%); // #eee
+$screen-xs-max: 767px;
+$screen-sm: 768px;
+$screen-sm-min: $screen-sm;
+$text-color: #C8C8C8;
+
+$navbar-default-link-color: $text-color;
+$navbar-default-link-hover-color: #fff;
+$navbar-default-link-hover-bg: transparent;
+$navbar-default-link-active-color: #fff;
+$navbar-default-link-active-bg: transparent;
+$navbar-default-link-disabled-color: $gray-light;
+$navbar-default-link-disabled-bg: transparent;
+
+$navbar-height: 44px;
+.text-muted {
+  color: $gray-light;
+}
+
+.pos-message{
+    color: black;
+}
+.pos .form-control {
+    display: inline-block !important;;
+}
+.pos .message-box{
+    position: absolute;
+    left: 0px;
+    top: 56px;
+    width: 100%;
+    height:100%;
+    background-color: rgba(0,0,0,0);
+    z-index:1000;
+}
+.pos .message-box .message{
+    position:relative;
+    top:0;left: 0; right: 0; bottom:0;
+    margin: auto;
+    width:350px;
+    font-size:22px;
+    background-color: #F0EEEE;
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.4);
+    z-index:1200;
+    font-family: 'Lato';
+    font-family: Lato;
+}
+.pos .message-box .message .o_no_activity{
+    cursor: initial;
+    -webkit-align-items: center;
+    align-items: center;
+    color: grey;
+    opacity: 0.5;
+    padding: 3px;
+    margin-top: 16px !important;
+    text-align: center;
+    font-size: 13px;
+}
+.pos .message .title {
+    background: #6ec89b;
+    margin: 0;
+    padding: 4px;
+    border-bottom: solid 1px rgba(60,60,60,0.1);
+    &:hover,&:focus{
+        text-decoration: none;
+    }
+}
+.pos .pos-new_message{
+    margin-left :90px;
+    color: #7f82ac;
+    }
+.pos .o_notification_counter{
+    font-size:14px;
+}
+.pos .message a {
+    text-decoration: none;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 4px 10px;
+
+}
+.pos .message a:hover {
+    color: #7f82ac;
+}
+
+.pos .pos-live-chat-selected {
+    font-weight: bold;
+    color : #7f82ac;
+    }
+
+.pos .fa-close {
+    margin-right: 10px;
+    cursor: pointer;
+    }
+
+.ui-widget{
+    font-family: "Lucida Grande", Helvetica, Verdana, Arial, sans-serif;
+    background:#FFFFFF;
+    font-size: 13px;
+    width:200px;
+    z-index: 10000;
+
+}
+.ui-menu{
+    padding: 2px 0;
+    margin-top: 4px;
+    }
+.ui-menu-item{
+    display: block;
+    background:#FFFFFF;
+    color: #000000;
+}
+
+.ui-menu-item:hover{
+    display: block;
+    background:#7f82ac;
+    color:#FFFFFF;
+}
+
+.hide {
+  display: none !important;
+}
+.o_mail_channel_preview .o_mail_channel_image > img{
+    width: 40px !important;
+}
+.back_to_pos{
+    color : #fff;
+    text-decoration: none;
+    &:hover{
+        text-decoration: none;
+    }
+}
+div.back_to_pos{
+    background: #dfa941;
+    padding: 6px 16px;
+    margin-bottom: 2px;
+}
+.o_mail_preview {
+    min-height: 50px;
+    padding: 5px;
+    .o_mail_preview_image {
+        width: 40px;
+        height: 40px;
+    }
+    .o_preview_info {
+        margin-left: 10px;
+        font-size:13px;
+        .o_preview_title {
+            .o_last_message_date {
+                padding-top: 2px;
+                font-size: x-small;
+                margin-left: 10px;
+            }
+        }
+    }
+}
+.o_filter_button, .o_new_message {
+    background: transparent !important;
+    border: 0 !important;
+    color: #fff !important;
+    font-weight: 900;
+}
+.o_mail_systray_dropdown_top .o_filter_button:hover,  .o_mail_systray_dropdown_top .o_filter_button.active {
+    color: #7C7BAD !important;
+}
+
+.pos h1{
+    font-size:20px !important;
+}
+.o_composer_button_add_attachment, .o_composer_button_emoji {
+    color: #000 !important;
+    background: transparent !important;
+}
+.pos .breadcrumb{
+    padding:0 !important;
+    margin-bottom: 0 !important;
+    border-radius:0 !important;
+}
+.pos .o_thread_window {
+  left: 0px !important;
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <report
+            id="action_vat_report_xlsx"
+            string="VAT Report"
+            model="vat.report.wizard"
+            report_type="xlsx"
+            file="vat_report_all_in_one.vat_report_xlsx"
+            name="vat_report_all_in_one.vat_report_xlsx"
+            menu="False"
+        />
+
+    </data>
+</odoo>

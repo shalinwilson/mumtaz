@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+<!--    <t t-name="button_barcode">-->
+<!--        <div class="left_button">-->
+<!--            <div class="button-icon">-->
+<!--                <img src="/pos_retail/static/src/icons/barcode.png" class="pos_logo"/>-->
+<!--            </div>-->
+<!--            <div class="button-name">-->
+<!--                Scan barcode-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </t>-->
+
+    <t t-name="button_combo_item_add_lot">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/lot.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Add Lot Combo Items
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="button_print_receipt">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/bill.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Review Receipt
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="button_print_last_order">
+        <div class="launchpad-app-container" style="display: none">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/bill.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Print Bill Last Order
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="button_register_payment">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/register_payment.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Register Payment
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="button_print_test">
+        <div class="btn">
+            <i class='fa fa fa-print' />Test Printer
+        </div>
+    </t>
+
+<!--    <t t-name="button_selection_pricelist">-->
+<!--        <div class="launchpad-app-container">-->
+<!--            <a>-->
+<!--                <div class="launchpad-app-icon">-->
+<!--                    <img src="/pos_retail/static/src/icons/checklist.png" width="100%"/>-->
+<!--                </div>-->
+<!--                <div class="launchpad-app-label">-->
+<!--                    <t t-esc='widget.get_order_pricelist()'/>-->
+<!--                </div>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </t>-->
+
+    <t t-extend="DiscountButton">
+        <t t-jquery=".js_discount" t-operation="replace">
+            <div class="launchpad-app-container">
+                <a>
+                    <div class="launchpad-app-icon">
+                        <img src="/pos_retail/static/src/icons/discounts.png" width="100%"/>
+                    </div>
+                    <div class="launchpad-app-label">
+                        Discount Manual
+                    </div>
+                </a>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="ReprintButton">
+        <t t-jquery="div[class*='js_reprint']" t-operation="replace">
+            <div class="launchpad-app-container" style="display: none">
+                <a>
+                    <div class="launchpad-app-icon">
+                        <img src="/pos_retail/static/src/icons/bill.png" width="100%"/>
+                    </div>
+                    <div class="launchpad-app-label">
+                        RePrint Receipt
+                    </div>
+                </a>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="SetPricelistButton">
+        <t t-jquery=".o_pricelist_button" t-operation="replace">
+            <div class="launchpad-app-container" style="display: none">
+                <a>
+                    <div class="launchpad-app-icon">
+                        <img src="/pos_retail/static/src/icons/checklist.png" width="100%"/>
+                    </div>
+                    <div class="launchpad-app-label">
+                        <t t-esc='widget.get_current_pricelist_name()'/>
+                    </div>
+                </a>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="button_print_user_card">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/id_card.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Print User Card
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="button_clear_order">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/trash.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Remove Order Blank Lines
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="button_lock_session">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/lock_screen.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Lock Screen
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-extend="SetFiscalPositionButton">
+        <t t-jquery="div[class*='control-button']" t-operation="replace">
+            <div class="launchpad-app-container">
+                <a>
+                    <div class="launchpad-app-icon">
+                        <img src="/pos_retail/static/src/icons/accounting.png" width="100%"/>
+                    </div>
+                    <div class="launchpad-app-label">
+                        <t t-esc='widget.get_current_fiscal_position_name()'/>
+                    </div>
+                </a>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="button_restart_session">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/users.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Session: <t t-esc="widget.pos.get_config()['name']"/>
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="button_medical_insurance_screen">
+        <div class="left_button">
+            <div class="button-icon">
+                <img src="/pos_retail/static/src/icons/medical.png" class="pos_logo"/>
+            </div>
+            <t t-if="widget.pos.get_order()">
+                <div class="button-name">
+                    <t t-if="widget.pos.get_order().get_medical_insurance()">
+                        <t t-esc="widget.pos.get_order().get_medical_insurance().employee"/>
+                    </t>
+                    <t t-if="!widget.pos.get_order().get_medical_insurance()">
+                        Add Insurance
+                    </t>
+                </div>
+            </t>
+            <t t-if="!widget.pos.get_order()">
+                <div class="button-name">
+                    Add Insurance
+                </div>
+            </t>
+        </div>
+    </t>
+
+    <t t-name="ButtonGoFloorsScreen">
+        <div class="launchpad-app-container highlight">
+            <a>
+                <div class="launchpad-app-icon">
+                    <i class="material-icons">dashboard</i>
+                </div>
+                <div class="launchpad-app-label">
+                    Tables Screen
+                    <span class="keyboard-shortcut">
+                        <i class="fa fa-keyboard"/>
+                        (J)
+                    </span>
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="button_set_guest">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/guests.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    <t t-if="widget.pos.get_order()">
+                        <t t-if="widget.pos.get_order().get_guest()">
+                            <t t-esc="widget.pos.get_order().get_guest()"/>
+                        </t>
+                        <t t-if="!widget.pos.get_order().get_guest()">
+                            Guest not Set
+                        </t>
+                    </t>
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="button_reset_sequence">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/reset.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Reset Sequence to 1
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-extend="OrderlineNoteButton">
+        <t t-jquery="div[class*='control-button']" t-operation="replace">
+            <div class="launchpad-app-container" style="display: none">
+                <a>
+                    <div class="launchpad-app-icon">
+                        <img src="/pos_retail/static/src/icons/note.png" width="100%"/>
+                    </div>
+                    <div class="launchpad-app-label">
+                        Note to Line
+                    </div>
+                </a>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="button_turn_onoff_printer">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/note.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    <t t-if="widget.pos.config.iface_print_via_proxy">
+                        Turn on Printer
+                    </t>
+                    <t t-else="">
+                        Turn off Printer
+                    </t>
+                </div>
+            </a>
+        </div>
+    </t>
+
+</templates>

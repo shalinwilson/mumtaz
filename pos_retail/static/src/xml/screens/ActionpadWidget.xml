@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="ActionpadWidget">
+        <t t-jquery="div[class*='actionpad']" t-operation="replace">
+            <div class="actionpad"  style="display: none">
+                <t t-if="widget.pos.get_order()">
+                    <div class="summary-box-left">
+                        <div class="summary-detail">
+                            Sub Total
+                            <span class='value subtotal'>
+                                <t t-esc="widget.format_currency(widget.pos.get_order().get_total_without_tax())"/>
+                            </span>
+                        </div>
+                        <div class="summary-detail">
+                            Taxes
+                            <span class='value taxes'>
+                                <t t-esc="widget.format_currency(widget.pos.get_order().get_total_with_tax() - widget.pos.get_order().get_total_without_tax())"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="summary-box-right">
+                        <div class="summary-detail">
+                            Discount
+                            <span class='discount'>
+                                <t t-esc="widget.format_currency(widget.pos.get_order().get_total_discount())"/>
+                            </span>
+                        </div>
+                        <div class="summary-detail total_amount">
+                            <span class="amount_total">
+                                <t t-esc="widget.format_currency(widget.pos.get_order().get_total_with_tax())"/>
+                            </span>
+                        </div>
+                    </div>
+                </t>
+            </div>
+            <div class="actionpad" style="display: none">
+                <t t-if="widget.pos.config.use_pricelist and widget.pos.pricelists.length > 1">
+                    <div class="button select-pricelist">
+                        <span class="pricelist-name">
+                            <i class="material-icons">format_list_bulleted</i>
+                            <t t-if="widget.pos.get_order() and widget.pos.get_order().pricelist">
+                                <t t-esc="widget.pos.get_order().pricelist.name"/>
+                            </t>
+                            <t t-else="">
+                                Set Pricelist
+                            </t>
+                        </span>
+                    </div>
+                </t>
+                <t t-if="widget.pos.config.quickly_payment_full">
+                    <div class='button quickly_paid'>
+                        <span class="pricelist-name">
+                            CheckOut Full
+                        </span>
+                    </div>
+                </t>
+            </div>
+            <div class="actionpad-buttons">
+                <div t-attf-class='button set-customer #{ ( widget.pos.get_client() and widget.pos.get_client().name.length > 10) ? "decentered" : "" }' style="display: none">
+                    <span class="customer-name">
+                        <i class="material-icons" style="margin-top: 10px">person</i>
+                        <t t-if="widget.pos.get_client()">
+                            <t t-esc="widget.pos.get_client().name"/>
+                        </t>
+                        <t t-if="!widget.pos.get_client()">
+                            Set Customer
+                        </t>
+                    </span>
+                </div>
+                <t t-if="widget.pos.config.allow_payment">
+                    <div class='button pay' style="display: none">
+                        <span class="customer-name">
+                            CheckOut
+                        </span>
+                    </div>
+                </t>
+                <div t-attf-class="line-container #{widget.pos.hide_pads ? 'oe_hidden' : ''}">
+                    <t t-if="widget.pos.config.fast_remove_line">
+                        <div class="launchpad-app-container remove_shopping_cart">
+                            <a>
+                                <div class="launchpad-app-icon">
+                                    <i class="material-icons">clear</i>
+                                </div>
+                                <div class="launchpad-app-label">
+                                    Remove Line
+                                </div>
+                            </a>
+                        </div>
+                    </t>
+                    <t t-if="widget.pos.generic_options and widget.pos.generic_options.length">
+                        <div class="launchpad-app-container set_generic_options">
+                            <a>
+                                <div class="launchpad-app-icon">
+                                    <i class="material-icons">add</i>
+                                </div>
+                                <div class="launchpad-app-label">
+                                    Set Generic Options
+                                </div>
+                            </a>
+                        </div>
+                    </t>
+                    <t t-if="widget.pos.config.return_products">
+                        <div class="launchpad-app-container return_products">
+                            <a>
+                                <div class="launchpad-app-icon">
+                                    <i class="material-icons">input</i>
+                                </div>
+                                <div class="launchpad-app-label">
+                                    Return Mode (Covert Order to Return Order)
+                                </div>
+                            </a>
+                        </div>
+                    </t>
+                    <t t-if="widget.pos.config.required_reason_return">
+                        <div class="launchpad-app-container input_reason_return">
+                            <a>
+                                <div class="launchpad-app-icon">
+                                    <i class="material-icons">question_answer</i>
+                                </div>
+                                <div class="launchpad-app-label">
+                                    Reason Return
+                                </div>
+                            </a>
+                        </div>
+                    </t>
+                    <div class="launchpad-app-container set_note_order">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">message</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Set Note to Order
+                                <span class="keyboard-shortcut"><i class="fa fa-keyboard"/>(U)</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container set_unit_measure">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">list</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Change Unit
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container modifier_bom">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">view_module</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Modifiers Bill of Material
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container create_mrp_product_direct">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">add</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Create Mrp Production Direct
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container set_dynamic_combo">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">dashboard</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Set Dynamic Combo
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container set_bundle_pack">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">view_module</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Modifiers Bundle/Pack Items
+                            </div>
+                        </a>
+                    </div>
+                    <t t-if="widget.pos.discounts and widget.pos.discounts.length">
+                        <div class="launchpad-app-container set_discount">
+                            <a>
+                                <div class="launchpad-app-icon">
+                                    <i class="material-icons">trending_down</i>
+                                </div>
+                                <div class="launchpad-app-label">
+                                    Set Global Discounts
+                                </div>
+                            </a>
+                        </div>
+                    </t>
+                    <t t-if="widget.pos.config.service_charge_ids and widget.pos.config.service_charge_ids.length > 0">
+                        <div class="launchpad-app-container service-charge">
+                            <a>
+                                <div class="launchpad-app-icon">
+                                    <i class="material-icons">book</i>
+                                </div>
+                                <div class="launchpad-app-label">
+                                    Set Services
+                                </div>
+                            </a>
+                        </div>
+                    </t>
+                    <div class="launchpad-app-container multi_variant">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">subject</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Set Variants and Attributes
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container change_cross_selling">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">reorder</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Cross Selling (Suggest Products with item selected)
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container product_packaging">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">view_module</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Set Package
+                            </div>
+                        </a>
+                    </div>
+                    <t t-if="widget.pos.config.discount_value and widget.pos.config.discount_value_limit > 0">
+                        <div class="launchpad-app-container discount-value">
+                            <a>
+                                <div class="launchpad-app-icon">
+                                    <i class="material-icons">trending_down</i>
+                                </div>
+                                <div class="launchpad-app-label">
+                                    Discounts Value
+                                </div>
+                            </a>
+                        </div>
+                    </t>
+                    <div class='launchpad-app-container set_tags'>
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">label</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Set Tags to selected Line
+                                <span class="keyboard-shortcut"><i class="fa fa-keyboard"/>(T)</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class='launchpad-app-container set_seller'>
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">person_add</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Set Seller to selected Line
+                            </div>
+                        </a>
+                    </div>
+                    <div class='launchpad-app-container set_note_orderline'>
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">message</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Note to selected Line
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container change_taxes">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">style</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Change Taxes to selected Line
+                            </div>
+                        </a>
+                    </div>
+                    <div class='launchpad-app-container set_note_order'>
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">message</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Note Receipt Order
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container set_discount_price">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">trending_down</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Set Discount Sale Price (to selected Line)
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container print_receipt">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">receipt</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Print Receipt
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container print_bill_last_order">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">receipt</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Print Bill Last Order
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container submit_order">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">print</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Order to Printers
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container split_order">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">content_cut</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Split Order
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container transfer_table">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">transform</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Transfer Table
+                            </div>
+                        </a>
+                    </div>
+                    <div class='launchpad-app-container lock_table'>
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">lock</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Lock Table
+                            </div>
+                        </a>
+                    </div>
+                    <div class='launchpad-app-container split_table'>
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="fa fa-cut"/>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Split Table
+                            </div>
+                        </a>
+                    </div>
+                    <div class='launchpad-app-container merge_table'>
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="fa fa-clone"/>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Combine/Merge Tables
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container print_receipt_bill">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">receipt</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Print Bill Draft
+                            </div>
+                        </a>
+                    </div>
+                    <t t-if="widget.pos.get_order()">
+                        <div class="launchpad-app-container set_number_guests">
+                            <a>
+                                <div class="launchpad-app-icon">
+                                    <i class="material-icons">people</i>
+                                </div>
+                                <div class="launchpad-app-label">
+                                    No of Guests:
+                                    <span class="notification"><t t-esc="widget.pos.get_order().customer_count" /></span>
+                                </div>
+                            </a>
+                        </div>
+                    </t>
+                    <div class='launchpad-app-container signature_order'>
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">attach_file</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Signature to Receipt
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container set_pricelist">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <img src="/pos_retail/static/src/icons/checklist.png" width="100%"/>
+                            </div>
+                            <div class="launchpad-app-label">
+                                <t t-esc='widget.get_current_pricelist_name()'/>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container cash_management_control">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <img src="/pos_retail/static/src/icons/cashbox.png" width="100%"/>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Cash Management
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container add_booking_order">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <img src="/pos_retail/static/src/icons/booking.png" width="100%"/>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Create Booking/Sale(Quotation) Order
+                            </div>
+                        </a>
+                    </div>
+                    <div class='launchpad-app-container add_shipping_order'>
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">local_shipping</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Shipping Order
+                            </div>
+                        </a>
+                    </div>
+                    <div class='launchpad-app-container assign_order_to_another_session'>
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <i class="material-icons">calendar_today</i>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Final and Assign Order
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container set_promotion">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <img src="/pos_retail/static/src/icons/promotions.png" width="100%"/>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Set Promotions
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container create_purchase_order">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <img src="/pos_retail/static/src/icons/internal_transfer.png" width="100%"/>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Create Purchase Order
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container create_internal_transfer_order">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <img src="/pos_retail/static/src/icons/internal_transfer.png" width="100%"/>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Create Internal Transfer Order
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container create_sale_order">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <img src="/pos_retail/static/src/icons/shopping_cart.png" width="100%"/>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Create Sale Order
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container set_partner_shipping_id">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <img src="/pos_retail/static/src/icons/shopping_cart.png" width="100%"/>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Receiver
+                            </div>
+                        </a>
+                    </div>
+                    <div class="launchpad-app-container set_loyalty_reward_program">
+                        <a>
+                            <div class="launchpad-app-icon">
+                                <img src="/pos_retail/static/src/icons/rewards.png" width="100%"/>
+                            </div>
+                            <div class="launchpad-app-label">
+                                Choice Rewards Program
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+
+</templates>

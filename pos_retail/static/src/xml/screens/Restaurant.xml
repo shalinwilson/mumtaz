@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates name="template" xml:space="preserve">
+
+    <t t-name="TableWidget">
+        <t t-if='!widget.selected'>
+            <div t-attf-class="table #{widget.table.locked ? 'table-locked' : ''}" t-att-style='widget.table_style_str()'>
+                <span
+                    t-if="widget.table.shape"
+                    t-att-class='"table-cover " + (widget.fill >= 1 ? "full" : "")'
+                    t-att-style='"height: " + Math.ceil(widget.fill * 100) + "%;"'
+                    >
+                </span>
+                <t t-if="widget.get_customer_count() &gt; 0">
+                    <span class="customer_count">
+                        <i class="material-icons">supervisor_account</i>
+                        <t t-esc='widget.get_customer_count()'/>
+                    </span>
+                </t>
+                <t t-if='widget.order_count'>
+                    <span t-att-class='"order-count " + (widget.notifications.printing ? "notify-printing":"") + (widget.notifications.skipped ? "notify-skipped" : "")'><t t-esc='widget.order_count'/></span>
+                </t>
+                <t t-else="">
+                    <t t-if="widget.get_count_orders()">
+                        <span class='order-count'><t t-esc='widget.get_count_orders()'/></span>
+                    </t>
+                </t>
+                <span class='label'>
+                    <t t-esc='widget.table.name' />
+                    <t t-if="widget.table.locked">
+                        <i class="material-icons">lock</i>
+                    </t>
+                </span>
+                <span t-attf-class="table-seats #{widget.pos.pos_session.mobile_responsive ? 'mobile' : ''}">
+                    <t t-esc="widget.table.seats" />
+                    <t t-esc="widget.get_owner_order()"/>
+                </span>
+            </div>
+        </t>
+        <t t-if='widget.selected'>
+            <div t-attf-class="table #{widget.table.locked ? 'table-locked' : ''}"  t-att-style='widget.table_style_str()'>
+                <span class='label'>
+                    <t t-esc='widget.table.name' />
+                    <t t-if="widget.table.locked">
+                        <i class="material-icons">lock</i>
+                    </t>
+                </span>
+                <span t-attf-class="table-seats #{widget.pos.pos_session.mobile_responsive ? 'mobile' : ''}">
+                    <t t-esc="widget.table.seats" />
+                    <t t-esc="widget.get_owner_order()"/>
+                </span>
+                <t t-if="widget.table.shape === 'round'">
+                    <span class='table-handle top ui-resizable-n'></span>
+                    <span class='table-handle bottom ui-resizable-s'></span>
+                    <span class='table-handle left ui-resizable-w'></span>
+                    <span class='table-handle right ui-resizable-e'></span>
+                </t>
+                <t t-if="widget.table.shape === 'square'">
+                    <span class='table-handle top right ui-resizable-ne'></span>
+                    <span class='table-handle top left ui-resizable-nw'></span>
+                    <span class='table-handle bottom right ui-resizable-se'></span>
+                    <span class='table-handle bottom left ui-resizable-sw'></span>
+                </t>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="PopUpSplitTableWidget">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y" style="width: 65%; min-height: 500px">
+                <div class="card">
+                    <p class="title"><t t-esc=" widget.options.title || 'Alert' " /></p>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped-1">
+                                <tbody>
+                                    <div class="product-list"/>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <span class="card-issue"/>
+                <div class="form-footer text-center">
+                    <div class="btn btn-danger pull-left cancel">
+                        Cancel <i class='fa fa-keyboard'/> (ESC)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="ProductMoveRecord">
+        <tr class='client-line' t-att-data-id='line.id'>
+            <th width='10%'>
+                <select class="control-button pop-split-table-label" name='table_id'>
+                    <option value=''>Select table</option>
+                    <t t-foreach='tables' t-as='table'>
+                        <option t-att-value='table.id'>
+                            <t t-esc='table.name'/>
+                        </option>
+                    </t>
+                </select>
+            </th>
+            <th width='40%' class="pop-split-table-label"><t t-esc="line.product.display_name"/></th>
+            <th width='10%'><input class="control-button pop-split-table-label" t-att-value="line.quantity"></input></th>
+            <th width='20%'>
+                <button class="control-button submit pop-split-table-label"><i class="fa fa-scissors">  Split</i></button>
+            </th>
+        </tr>
+    </t>
+
+    <t t-name="ButtonSplitTable">
+        <div class='launchpad-app-container'>
+            <a>
+                <div class="launchpad-app-icon">
+                    <i class="fa fa-cut"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Split Table
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="PopUpMergeTables">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y" style="width: 65%; min-height: 500px">
+                <div class="card">
+                    <p class="title"><t t-esc=" widget.options.title || 'Alert' " /></p>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped-1">
+                                <tbody>
+                                    <div class="product-list">
+                                        <t t-if="widget.tables">
+                                            <t t-foreach="widget.tables" t-as="table">
+                                                <span class='product table' t-att-data-id="table.id">
+                                                    <div class="product-name">
+                                                        <t t-esc="table.name"/>
+                                                    </div>
+                                                </span>
+                                            </t>
+                                        </t>
+                                    </div>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <span class="card-issue"/>
+                <div class="form-footer text-center">
+                    <div class="btn btn-success pull-right confirm">
+                        Merge <i class='fa fa-keyboard'/> (Enter)
+                    </div>
+                    <div class="btn btn-danger pull-left cancel">
+                        Cancel <i class='fa fa-keyboard'/> (ESC)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+
+    <t t-extend="SplitbillButton">
+        <t t-jquery="span[class*='control-button']" t-operation="replace">
+            <div class="launchpad-app-container" style="display: none">
+                <a>
+                    <div class="launchpad-app-icon">
+                        <img src="/pos_retail/static/src/icons/split.png" width="100%"/>
+                    </div>
+                    <div class="launchpad-app-label">
+                        Split Order Lines
+                    </div>
+                </a>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="PrintBillButton">
+        <t t-jquery="span[class*='control-button']" t-operation="replace">
+            <div class="launchpad-app-container" style="display: none">
+                <a>
+                    <div class="launchpad-app-icon">
+                        <img src="/pos_retail/static/src/icons/bill.png" width="100%"/>
+                    </div>
+                    <div class="launchpad-app-label">
+                        Bill
+                    </div>
+                </a>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="SubmitOrderButton">
+        <t t-jquery="span[class*='control-button']" t-operation="replace">
+            <div class="launchpad-app-container" style="display: none">
+                <a>
+                    <div class="launchpad-app-icon">
+                        <img src="/pos_retail/static/src/icons/chef.png" width="100%"/>
+                    </div>
+                    <div class="launchpad-app-label">
+                        Order
+                    </div>
+                </a>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="TableGuestsButton">
+        <t t-jquery="div[class*='control-button']" t-operation="replace">
+            <div class="launchpad-app-container" style="display: none">
+                <a>
+                    <div class="launchpad-app-icon">
+                        <img src="/pos_retail/static/src/icons/clients.png" width="100%"/>
+                    </div>
+                    <div class="launchpad-app-label">
+                        No of Guests: <t t-esc="widget.guests()" />
+                    </div>
+                </a>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="TransferOrderButton">
+        <t t-jquery="div[class*='control-button']" t-operation="replace">
+            <div class="launchpad-app-container" style="display: none">
+                <a>
+                    <div class="launchpad-app-icon">
+                        <img src="/pos_retail/static/src/icons/confirm.png" width="100%"/>
+                    </div>
+                    <div class="launchpad-app-label">
+                        Transfer Table
+                    </div>
+                </a>
+            </div>
+        </t>
+    </t>
+
+
+</templates>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="DiscountWidget">
+        <div class="categories discount-list">
+            <div class="category-list-scroller touch-scrollable">
+                <div class="category-list">
+                    <t t-foreach="widget.pos.discounts || []" t-as="discount">
+                        <span class="category-simple-button js-category-switch discount" t-att-id="discount.id">
+                            <t t-if="discount.type == 'percent'">
+                                <t t-esc="discount.amount"/>%</t>
+                            <t t-if="discount.type !== 'percent'">
+                                <t t-esc="widget.format_currency(discount.amount)"/>
+                            </t>
+                        </span>
+                    </t>
+                    <span class="category-simple-button js-category-switch discount" id="0">
+                        <i class="material-icons">delete</i>
+                    </span>
+                    <span class="category-simple-button js-category-switch numpad-backspace">
+                        <img src="/point_of_sale/static/src/img/backspace.png" width="24" height="21" alt="Backspace"/>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </t>
+
+
+</templates>

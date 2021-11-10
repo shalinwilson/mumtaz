@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+        <record id="delivery_cancel_form_cft" model="ir.ui.view">
+            <field name="name">Cancel Delivery Order</field>
+            <field name="model">cancel.picking.wizard</field>
+            <field name="arch" type="xml"> 
+                <form>
+        		    <header>
+                        <button string='Clear All' name='clear_all_delivery' class='pull-right' icon="fa-pencil-square-o" type='object'/>
+        		    </header>               
+                    <group colspan="4" string="Delivery orders">
+                        <field name="picking_ids" domain ="[('state','!=','cancel'),('id','in',context.get('pickings',False))]"  nolabel="1"/> 
+                    </group>
+
+                    <footer>
+                        <button name='cancel_selected_delivery_orders'  string='Cancel Delivery Orders' type='object' class="oe_highlight"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+    </record>
+        
+        <record id="action_cancel_delivery_cft" model="ir.actions.act_window">
+            <field name="name">Cancel Delivery</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cancel.picking.wizard</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="delivery_cancel_form_cft"/>
+            <field name="context">{}</field>
+        </record>
+        
+
+</data>
+</odoo>

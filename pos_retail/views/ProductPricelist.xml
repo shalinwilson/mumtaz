@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="product_pricelist_view_inherit" model="ir.ui.view">
+            <field name="name">product.pricelist.form</field>
+            <field name="inherit_id" ref="product.product_pricelist_view_inherit"/>
+            <field name="model">product.pricelist</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='item_ids']//field[@name='name']" position="after">
+                    <field name="uom_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_pricelist_item_form_view" model="ir.ui.view">
+            <field name="name">product.pricelist.item.form</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+            <field name="model">product.pricelist.item</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field name="uom_ids" invisible="1"/>
+                    <field name="uom_id"
+                           domain="[('id', 'in', uom_ids)]"
+                           attrs="{'invisible':[('applied_on', '!=', '0_product_variant')], 'required':[('applied_on', '=', '0_product_variant')]}"
+                           options="{'no_create':1}"/>
+                </xpath>
+                <xpath expr="//field[@name='categ_id']" position="after">
+                    <field name="pos_category_id"
+                           attrs="{
+                                  'invisible':[('applied_on', '!=', '4_pos_category')],
+                                  'required':[('applied_on', '=', '4_pos_category')]}"
+                           options="{'no_create':1}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

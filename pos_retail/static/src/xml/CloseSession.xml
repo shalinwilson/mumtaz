@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="HeaderButtonWidget">
+        <t t-jquery="div[class*='header-button']" t-operation="replace">
+            <div class="oe_status oe_red close-session">
+                <i class="fa fa-power-off"/>
+            </div>
+        </t>
+    </t>
+
+</templates>

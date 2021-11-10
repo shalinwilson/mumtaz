@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="PaymentMethodWidget">
+        <div class="categories payment-method-list">
+            <div class="category-list-scroller touch-scrollable">
+                <div class="category-list">
+                    <t t-foreach="widget.payment_methods || []" t-as="method">
+                        <span class="category-simple-button js-category-switch service" t-att-id="method.id">
+                            <t t-if="method.cash_journal_id">
+                                <t t-esc="method.cash_journal_id[1]"/>
+                            </t>
+                            <t t-else="">
+                                <t t-esc="method.name"/>
+                            </t>
+
+                        </span>
+                    </t>
+                    <span class="category-simple-button js-category-switch numpad-backspace">
+                        <img src="/point_of_sale/static/src/img/backspace.png" width="24" height="21" alt="Backspace"/>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

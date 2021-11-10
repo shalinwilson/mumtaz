@@ -1,0 +1,13 @@
+.pos .paymentline.selected.o_pos_rounding, .pos .paymentline.o_pos_rounding {
+    background: $secondary_color;
+}
+.pos .col-tendered.edit.o_pos_rounding {
+    color: $secondary_color;
+    box-shadow: 0px 0px 0px 3px $secondary_color;
+}
+.refresh-button {
+    background-color: #393939;
+    border: 1px solid #292929;
+    cursor:pointer;
+}
+

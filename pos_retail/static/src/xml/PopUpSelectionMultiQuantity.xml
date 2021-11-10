@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="PopUpSelectionMultiQuantity">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y" style="width: 80%; min-height: 500px">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span class='searchbox'>
+                                <input class='popup-seachbox' placeholder='Search Items Here ...'/>
+                                <span class='search-clear'></span>
+                            </span>
+                            <span class="header_button"/>
+                        </div>
+                    </div>
+                    <t t-if="widget.options.title">
+                        <h4 class="card-title">
+                            <t t-esc="widget.options.title"/>
+                        </h4>
+                    </t>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="table table-striped" style="max-height: 500px !important">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <span class="card-issue"/>
+                <div class="form-footer text-center">
+                    <div class="btn btn-danger pull-left cancel">
+                        Close (Clear) <i class='fa fa-keyboard'/> (ESC)
+                    </div>
+                    <div class="btn btn-success pull-left confirm">
+                        Confirm <i class='fa fa-keyboard'/> (Enter)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="combo_items">
+        <t t-set="count" t-value="1"/>
+        <tr style="border-bottom: 1px solid">
+            <td class="text-left"></td>
+            <td class="text-left">Product</td>
+            <td class="text-right">Price Extra</td>
+            <td class="text-center"><i class="fa fa-plus"/> Qty</td>
+            <td class="text-center"><i class="fa fa-minus"/> Qty</td>
+        </tr>
+        <t t-foreach="sub_datas || []" t-as="combo_item">
+            <tr t-att-data-id="combo_item.id">
+                <td class="text-left"><t t-esc="count"/></td>
+                <td class="text-left"><t t-esc="combo_item.product_id[1]"/> </td>
+                <td class="text-right"><t t-esc="widget.format_currency(combo_item.price_extra)"/> </td>
+                <td class="text-center add_quantity" t-att-data-id="combo_item.id" t-value="combo_item.quantity" style="font-weight: 900"><t t-esc="combo_item.quantity"/> </td>
+                <td class="text-center remove_quantity" t-att-data-id="combo_item.id" t-value="combo_item.quantity" style="font-weight: 900">
+                    <i class="fa fa-minus"/>
+                </td>
+            </tr>
+            <t t-set="count" t-value="count + 1"/>
+        </t>
+    </t>
+
+    <t t-name="BomLines">
+        <t t-set="count" t-value="1"/>
+        <tr style="border-bottom: 1px solid">
+            <td class="text-left"></td>
+            <td class="text-left">Product</td>
+            <td class="text-right">Bom Quantity</td>
+            <td class="text-center"><i class="fa fa-plus"/></td>
+            <td class="text-center"><i class="fa fa-minus"/></td>
+        </tr>
+        <t t-foreach="sub_datas || []" t-as="bom_line">
+            <tr t-att-data-id="bom_line.id">
+                <td class="text-left"><t t-esc="count"/></td>
+                <td class="text-left"><t t-esc="bom_line.product_id[1]"/></td>
+                <td class="text-right"><t t-esc="bom_line.quantity"/></td>
+                <td class="text-center add_quantity" t-att-data-id="bom_line.id" t-value="bom_line.quantity" style="font-weight: 900"><t t-esc="bom_line.quantity"/></td>
+                <td class="text-center remove_quantity" t-att-data-id="bom_line.id" t-value="bom_line.quantity" style="font-weight: 900">
+                    <i class="fa fa-minus"/>
+                </td>
+            </tr>
+            <t t-set="count" t-value="count + 1"/>
+        </t>
+    </t>
+
+</templates>

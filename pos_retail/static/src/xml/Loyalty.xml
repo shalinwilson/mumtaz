@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="ClientDetails">
+        <t t-jquery="div[class*='client-details-right']" t-operation="append">
+            <t t-if="partner.pos_loyalty_point">
+                <div class='client-detail'>
+                    <span class='label'>Loyalty Points</span>
+                    <span class='detail'><t t-esc='widget.chrome.format_currency_no_symbol(partner.pos_loyalty_point)'/></span>
+                </div>
+            </t>
+        </t>
+    </t>
+
+    <t t-extend="OrderWidget">
+        <t t-jquery="div[class*='clearfix']" t-operation="before">
+            <t t-set="order" t-value="widget.pos.get_order()"/>
+            <t t-if="order">
+                <t t-if="widget.pos.loyalty">
+                    <div class="actionpad" style="display: none">
+                        <div class="summary-box-left">
+                            <div class="summary-detail">
+                                Client Points
+                                <span class="value client_point">
+                                    <t t-esc="widget.format_currency_no_symbol(widget.pos.get_order().get_client_point()['client_point'])"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="summary-box-left">
+                            <div class="summary-detail">
+                                Remaining Points
+                                <span class="value remaining_point">
+                                    <t t-esc="widget.format_currency_no_symbol(widget.pos.get_order().get_client_point()['remaining_point'])"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="summary-box-right">
+                            <div class="summary-detail">
+                                Redeem Points
+                                <span class="value redeem_point">
+                                    <t t-esc="widget.format_currency_no_symbol(widget.pos.get_order().get_client_point()['redeem_point'])"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="summary-box-right">
+                            <div class="summary-detail">
+                                Plus Points
+                                <span class="value plus_point">
+                                    <t t-esc="widget.format_currency_no_symbol(widget.pos.get_order().get_client_point()['plus_point'])"/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="summary-box-right">
+                            <div class="summary-detail">
+                                Next Points
+                                <span class="value next_point">
+                                    <t t-esc="widget.format_currency_no_symbol(widget.pos.get_order().get_client_point()['next_point'])"/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </t>
+
+    <!--    <t t-extend="Orderline">-->
+    <!--        <t t-jquery="ul[class*='info-list']:first .info" t-operation="append">-->
+    <!--            <t t-if="line.plus_point">-->
+    <!--                <img src="/pos_retail/static/src/icons/medal.png" class="order_line_logo"/>-->
+    <!--                <span class="line_plus_point">-->
+    <!--                    + <t t-esc="line.plus_point" /> (point)-->
+    <!--                </span>-->
+    <!--            </t>-->
+    <!--            <t t-if="line.redeem_point">-->
+    <!--                <img src="/pos_retail/static/src/icons/medal.png" class="order_line_logo"/>-->
+    <!--                <span class="line_redeem_point">-->
+    <!--                    <t t-esc="line.redeem_point" /> (point)-->
+    <!--                </span>-->
+    <!--            </t>-->
+    <!--        </t>-->
+    <!--    </t>  only single app-->
+
+
+</templates>

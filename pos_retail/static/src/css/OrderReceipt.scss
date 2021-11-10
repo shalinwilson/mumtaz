@@ -1,0 +1,307 @@
+/*================= Receipt design ==============*/
+.pos-receipt-print {
+  width: 512px;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: left;
+  direction: ltr;
+  font-size: 28px;
+  color: #000000;
+  font-family: $font_family_pos;
+
+}
+
+.pso .receipt-row {
+  display: flex;
+  font-size: 11px;
+  line-height: 0.5em;
+}
+
+.pos .receipt-cell {
+  flex: 1;
+  color: black;
+  line-height: 1.5em !important;
+  
+}
+
+//.pos .receipt-cell .product-line-name {
+//  line-height: 1.5em !important;
+//  
+//}
+
+.pos-receipt .receipt-line {
+  line-height: 1.5em;
+  font-size: 11px;
+}
+
+.pos .line-header {
+  text-align: left;
+  font-weight: 500;
+  font-size: 11px;
+}
+
+.pos-receipt .pos-receipt-right-align {
+  float: right;
+  font-size: 11px;
+  text-align: right;
+  margin-left: 5px;
+}
+
+.pos-receipt .pos-receipt-center-align {
+  text-align: center;
+  margin-bottom: 5px;
+  font-size: 11px;
+  /*margin-left: 15em;*/
+}
+
+.pos-receipt .pos-receipt-left-padding {
+  padding-left: 0em;
+  line-height: 1.5em;
+}
+
+.pos-receipt .orderline-product-name {
+  line-height: 1.5em;
+  font-size: 11px;
+}
+
+.pos-receipt .pos-receipt-logo {
+  display: block;
+  width: 8em;
+  margin: auto;
+  height: 5em;
+  margin-bottom: 3mm;
+}
+
+.pos-receipt .pos-receipt-contact {
+  margin-top: 0em;
+  font-size: 100% !important;
+  text-align: left;
+}
+
+.pos-receipt .pos-receipt-order-data {
+  text-align: center;
+  font-size: 11px;
+  margin-bottom: 0.8em;
+}
+
+.pos-receipt .pos-receipt-amount {
+  font-size: 200%;
+  padding-left: 0em !important;
+}
+
+.pos-receipt .pos-receipt-title {
+  font-weight: bold;
+  font-size: 125%;
+  text-align: center;
+}
+
+.pos-receipt .pos-receipt-header {
+  font-size: 125%;
+  text-align: center;
+}
+
+.pos-receipt .pos-order-receipt-cancel {
+  color: $primary_color;
+}
+
+.pos-payment-terminal-receipt {
+  text-align: center;
+  font-size: 75%;
+}
+
+.pos-receipt .amount_total {
+  font-size: 125%;
+}
+
+.pos-receipt .header_barcode {
+  text-align: center;
+  height: 5em;
+  width: 15em;
+  margin-left: -5em;
+}
+
+.pos-receipt .footer_barcode {
+  display: block;
+  height: 7em;
+  width: 15em;
+  margin: auto;
+  vertical-align: middle;
+}
+
+.pos-receipt .receipt_line_image {
+  width: 3em;
+  height: 3em;
+  padding-right: 0.5em;
+}
+
+.pos .full-size-receipt-body {
+  margin-top: 22px;
+  margin-bottom: 22px;
+  border-radius: 15px;
+  border: 1px solid black;
+  background: #ffffff;
+}
+
+.pos .full-size-p-style {
+  margin-bottom: 1px !important;
+  margin-top: 1px !important;
+  text-align: left !important;
+  font-size: 16px !important;
+  padding: 0px;
+}
+
+.pos .full-size-logo {
+  width: 50%;
+  height: 75px !important;
+  float: left;
+  margin-top: 22px;
+}
+
+.pos .full-size-barcode {
+  float: right;
+  height: 50px;
+  width: 150px;
+}
+
+.pos .full-size-receipt-orderlines {
+  width: 100%;
+  margin-right: 15px;
+  margin-left: 15px;
+  font-size: 16px !important;
+  margin-bottom: 10mm;
+}
+
+.pos .full-size-product-name {
+  border: 1px solid black;
+  width: 45%;
+  text-align: center;
+  padding: 2px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.pos .full-size-product-price {
+  border: 1px solid black;
+  width: 15%;
+  text-align: center;
+  padding: 2px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+
+.pos .full-size-product-qty {
+  border: 1px solid black;
+  width: 5%;
+  text-align: center;
+  padding: 2px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.pos .full-size-product-wty {
+  border: 1px solid black;
+  width: 5%;
+  text-align: center;
+  padding: 2px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.pos .full-size-product-disc {
+  border: 1px solid black;
+  width: 5%;
+  text-align: center;
+  padding: 2px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.pos .full-size-product-taxes {
+  border: 1px solid black;
+  width: 5%;
+  text-align: center;
+  padding: 2px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.pos .full-size-product-subtotal {
+  border: 1px solid black;
+  width: 20%;
+  text-align: center;
+  padding: 2px;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.pos .full-size {
+  width: 100% !important;
+}
+.pos .full-size .td {
+  vertical-align: top;
+}
+
+.pos .center {
+  text-align: center;
+  font-size: 13px !important;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #FAFAFA;
+  font: 12pt "Tahoma";
+}
+
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.pos .a5-body {
+  width: 270mm;
+  font-size: 16px;
+  color: black;
+  margin: auto;
+}
+
+
+.pos .pos-receipt-container > div {
+  color: black;
+  margin: auto;
+  //padding: 1mm; // kimanh
+  font-size: 11px;
+  display: inherit;
+  
+  max-width: 300px !important;
+  background: #ffffff !important;
+}
+
+.pos .pos-receipt {
+  color: black;
+  display: block;
+  margin: auto;
+  text-align: left;
+  width: 300px;
+  background-color: white;
+  padding: 15px;
+  padding-bottom: 30px;
+  overflow: hidden !important;
+  overflow-y: auto !important;
+  max-height: 80%;
+}
+
+.pos .pos-receipt-container {
+  margin: auto;
+  color: black !important;
+  margin-top: 2em;
+  width: 50%;
+  float: left;
+}
+

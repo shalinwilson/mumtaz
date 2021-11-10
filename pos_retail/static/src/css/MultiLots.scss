@@ -1,0 +1,26 @@
+.pos .lot-add {
+    cursor: pointer;
+    background: $secondary_color;
+    color: white;
+}
+
+.pos .popup .lot-grid {
+    overflow: auto;
+    height: 450px;
+    margin: 10px;
+}
+
+.pos .popup .lots-grid .client-list td {
+
+}
+
+.pos .lot-delete {
+    background: $primary_color;
+    color: white !important;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 30px !important;
+    border-radius: 1.0em;
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="vat_report_wizard_form_view" model="ir.ui.view">
+            <field name="name">vat.report.wizard.form.view</field>
+            <field name="model">vat.report.wizard</field>
+            <field name="arch" type="xml">
+            <form>
+                <div style="margin-left: 50px;">
+                    <label for="report_type">Report Type: </label>
+                    <field name="report_type" class="oe_inline" required="1"/>
+                </div>
+                <group>
+                    <group>
+                        <field name="date_from"/>
+                        <field name="target_move" widget="radio"/>
+                    </group>
+                    <group>
+                        <field name="date_to"/>
+                        <field name="tax_payment_included" attrs="{'invisible': [('report_type', '=', 'vat_statement')]}"/>
+                        <field name="tax_refund_included" attrs="{'invisible': [('report_type', '=', 'vat_statement')]}"/>
+                        <field name="misc_adj_included" attrs="{'invisible': [('report_type', '=', 'vat_statement')]}"/>
+                        <field name="tax_group_ids" widget="many2many_tags" attrs="{'invisible': [('report_type', '=', 'vat_return')]}"/>
+                        <field name="tax_ids" widget="many2many_tags" attrs="{'invisible': [('report_type', '=', 'vat_return')]}"/>
+                        <field name="type_tax_use" attrs="{'invisible': [('report_type', '=', 'vat_return')]}"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_generate_vat_report" string="Export Excel" type="object" default_focus="1" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-secondary" special="cancel" />
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_vat_report_wizard" model="ir.actions.act_window">
+            <field name="name">VAT Report</field>
+            <field name="res_model">vat.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="action_vat_report_wizard" id="menu_vat_report_wizard" parent="account.menu_finance_reports" sequence="45" groups="base.group_user" />
+
+    </data>
+</odoo>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="PopUpSelectProductAttributes">
+        <div class="modal-dialog">
+            <div class="popup touch-scrollable scrollable-y" style="width: 85%; min-height: 80% !important">
+                <div class="card">
+                    <p class="title"><t t-esc=" widget.options.title || 'Alert' " /></p>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="table table-attributes">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <div class="table-responsive">
+                            <table class="table table-products">
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <span class="card-issue"/>
+                <div class="form-footer text-center">
+                    <div class="btn btn-success pull-right confirm">
+                        Add to Cart <i class='fa fa-keyboard'/> (Enter)
+                    </div>
+                    <div class="btn btn-danger pull-left cancel">
+                        Close <i class='fa fa-keyboard'/> (ESC)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="ProductAttributes">
+        <t t-foreach="products" t-as="product">
+            <t t-call="ProductAttribute"/>
+        </t>
+    </t>
+
+    <t t-name="Attributes">
+        <t t-foreach="attributes" t-as="attribute">
+            <span class='popup_category_item category-simple-button js-category-switch' t-att-data-attribute-id="attribute.id" >
+                <t t-esc="attribute.display_name"/>
+            </span>
+        </t>
+    </t>
+
+    <t t-name="ProductAttribute">
+        <article t-attf-class="product #{product.selected ? 'item-selected' : '' }" t-att-data-product-id="product.id" tabindex="0" t-attf-aria-labelledby="article_product_#{product.id}">
+            <div class="combo-item-product-img-big" style="margin-top: 40px">
+                <img class='combo-item-product_list_image' t-att-src='widget.get_product_image_url(product)'/>
+            </div>
+            <t t-call="ProductPrice"/>
+            <t t-if="widget.pos.config.display_onhand">
+                <t t-if="product['type'] == 'product'">
+                    <t t-set="warning_out_stock" t-value="product.qty_available - product.qty_warning_out_stock"/>
+                    <t t-if="out_stock">
+                         <div class="ribbon"><span style="background: #ff3d00">Out Stock</span></div>
+                    </t>
+                    <t t-if="!out_stock and warning_out_stock &lt; 0">
+                        <div class="ribbon"><span style="background: #ff3d00">Limit Stock</span></div>
+                    </t>
+                </t>
+            </t>
+            <div class="product-name">
+                <t t-call='ProductName'/>
+                <t t-if="widget.pos.config.display_onhand">
+                    <t t-call="ProductOnHand"/>
+                </t>
+                <t t-set="units" t-value="widget.pos.get_units_barcode_by_id(product.id)"/>
+                <t t-if="units.length">
+                    Multi Barcodes (Units):
+                    <t t-foreach='units' t-as='unit'>
+                        <div class="tag-label"><t t-esc="unit.uom_id[1]"/></div>
+                    </t>
+                </t>
+                <t t-set="taxes" t-value="widget.pos.get_taxes(product)"/>
+                <t t-if="taxes.length">
+                    <t t-foreach='taxes' t-as='tax'>
+                        <div class="taxes-label"><t t-esc="tax.name"/></div>
+                    </t>
+                </t>
+            </div>
+        </article>
+    </t>
+
+</templates>

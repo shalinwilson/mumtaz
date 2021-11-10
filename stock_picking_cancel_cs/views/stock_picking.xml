@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+     <record model="ir.ui.view" id="cancel_order_extended_for_warehouse_cft">
+        <field name="name">stock.picking.extended</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref = "stock.view_picking_form"/>
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+           <xpath expr="//button[@name='action_cancel']"  position="after">
+              <field name="cancel_done_picking" invisible="1" />
+              <button name="action_cancel" id='btn_cancel' attrs="{'invisible':['|',('cancel_done_picking','=',False),('state','!=','done')]}" string="Cancel" groups="base.group_user" type="object" context="{'Flag':True}"/>
+              <button name="action_draft" id='btn_reset_draft' states="cancel" string="Reset to Draft" type="object"/>
+           </xpath>
+        </field>
+    </record>
+</data>
+</odoo>

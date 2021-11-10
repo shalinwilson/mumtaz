@@ -1,0 +1,34 @@
+.pos .order .orderline .session_info {
+	text-align: left;
+	width: 100%;
+	font-size: 13px;
+	color:$secondary_color;
+}
+.pos .order-button .order-sequence{
+	position:relative;
+}
+.pos .order-button .session_info{
+	font-size: 60%;
+	position:absolute;
+	text-align:center;
+	width:100%;
+	left:0;
+	line-height:0;
+	bottom:-5px;
+	color: $secondary_color;
+}
+.pos .pos_selector_info {
+	color: $secondary_color
+}
+.pos .pos-support {
+	color: $primary_color
+}
+.pos .order-date {
+	padding-top: 10px;
+    padding-left: 15px;
+    font-size: 22px;
+    color: $secondary_color;
+}
+.pos .bus-info {
+	//color: blue;
+}

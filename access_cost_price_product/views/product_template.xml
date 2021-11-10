@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- product.template | form -->
+    <record id="access_cost_price_product_form_view" model="ir.ui.view">
+        <field name="name">access.template.view.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='standard_price_uom']" position="attributes">
+                <attribute name="groups">access_cost_price_product.hide_cost_product</attribute>
+            </xpath>
+            <xpath expr="//label[@for='standard_price']" position="attributes">
+                <attribute name="groups">access_cost_price_product.hide_cost_product</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- product.template | tree -->
+    <record id="access_cost_price_product_tree_view" model="ir.ui.view">
+        <field name="name">access.template.view.tree</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='standard_price']" position="attributes">
+                <attribute name="groups">access_cost_price_product.hide_cost_product</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+

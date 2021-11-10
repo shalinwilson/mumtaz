@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="TicketsScreen">
+        <div class="clientlist-screen screen">
+            <div class="full_width screen-content">
+                <section class="top-content">
+                    <span class='button back'>
+                        Back
+                        <span class="keyboard-shortcut">
+                            <i class="fa fa-keyboard"/>
+                            (ESC)
+                        </span>
+                    </span>
+                    <span class='searchbox search-product'>
+                        <input placeholder='Search Ticket Order' />
+                        <span class="search-clear right">
+                            <i class="fa fa-remove"></i>
+                        </span>
+                    </span>
+                    <span class="button next add_new_ticket">
+                        <i class="material-icons">add</i>
+                    </span>
+                </section>
+                <section class="full-content">
+                    <div class='window'>
+                        <section class='subwindow collapsed'>
+                            <div class='subwindow-container collapsed'>
+                                <div class='subwindow-container-fix product-details-contents'>
+                                </div>
+                            </div>
+                        </section>
+                        <section class='subwindow'>
+                            <div class='subwindow-container'>
+                                <div class='subwindow-container-fix touch-scrollable scrollable-y'>
+                                    <table class='client-list'>
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center"><a href="#" class="sort sort_by_order_time">Created Time</a></th>
+                                                <th class="text-center"><a href="#" class="sort sort_by_order_date">Created Date</a></th>
+                                                <th class="text-center"><a href="#" class="sort sort_by_order_sequence">Sequence Number</a></th>
+                                                <th class="text-center"><a href="#" class="sort sort_by_order_ref">Order Ref</a></th>
+                                                <th class="text-center"><a href="#" class="sort sort_by_order_client">Client</a></th>
+                                                <th class="text-center"><a href="#" class="sort sort_by_order_note">Note</a></th>
+                                                <th class="text-center"><i class="material-icons">shopping_cart</i></th>
+                                                <th class="text-right"><a href="#" class="sort sort_by_order_total">Total</a></th>
+                                                <th class="text-center"><a href="#" class="sort sort_by_order_status">Status</a></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class='client-list-contents'>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="Ticket">
+        <tr t-attf-class='product_row #{ (widget.pos.get_order() and order.uid == widget.pos.get_order().uid) ? "highlight" : ""} ' t-att-data-id='order.uid'>
+            <td class="text-center">
+                <t t-esc='order.created_time'/>
+            </td>
+            <td class="text-center">
+                <t t-esc='order.created_date'/>
+            </td>
+            <td class="text-center">
+                 <t t-esc='order.sequence_number'/>
+            </td>
+            <td class="text-center">
+                 <t t-esc='order.name'/>
+            </td>
+            <td class="text-center">
+                <t t-if="order.client_name">
+                    <t t-esc='order.client_name'/>
+                </t>
+            </td>
+            <td class="text-center">
+                <t t-if="order.note">
+                    <t t-esc='order.note'/>
+                </t>
+            </td>
+            <td class="text-center">
+                <t t-esc='order.total_items'/>
+            </td>
+            <td class="text-right"><t t-esc='widget.format_currency(order.get_total_with_tax())'/></td>
+            <td class="text-center">
+                <t t-esc='order.status'/>
+            </td>
+            <td class="remove_ticket">
+                <i class="material-icons">clear</i>
+            </td>
+        </tr>
+    </t>
+
+</templates>

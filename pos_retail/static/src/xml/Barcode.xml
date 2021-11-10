@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="Chrome">
+        <t t-jquery="div[class='pos-content']" t-operation="append">
+            <img id="barcode" class="oe_hidden"
+                     style="display: none"/>
+            <img id="booking_barcode"
+                     class="oe_hidden"
+                     style="display: none"/>
+            <div id="canvas-holder"/>
+        </t>
+    </t>
+
+</templates>

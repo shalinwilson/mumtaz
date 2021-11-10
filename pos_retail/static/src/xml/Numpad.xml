@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="NumpadWidget">
+        <t t-jquery="div[class*='numpad']" t-operation="replace">
+            <div class="numpad" t-attf-style="#{!widget.pos.config.allow_numpad ? 'visibility: hidden' : ''}">
+                <button class="input-button number-char">1</button>
+                <button class="input-button number-char">2</button>
+                <button class="input-button number-char">3</button>
+                <button class="mode-button" data-mode='quantity' t-attf-style="#{!widget.pos.config.allow_qty ? 'visibility: hidden' : ''}">
+                    Qty
+                    <span class="keyboard-shortcut">
+                        <i class="fa fa-keyboard"/>
+                        (Q)
+                    </span>
+                </button>
+                <button class="input-button number-char">4</button>
+                <button class="input-button number-char">5</button>
+                <button class="input-button number-char">6</button>
+                <button class="mode-button" data-mode='discount' title="Keyboard Event: d" t-attf-style="#{!widget.pos.config.allow_discount ? 'visibility: hidden' : ''}">
+                    Disc
+                    <span class="keyboard-shortcut">
+                        <i class="fa fa-keyboard"/>
+                        (D)
+                    </span>
+                </button>
+                <button class="input-button number-char">7</button>
+                <button class="input-button number-char">8</button>
+                <button class="input-button number-char">9</button>
+                <button class="mode-button" data-mode='price' title="Keyboard Event: p" t-attf-style="#{!widget.pos.config.allow_price ? 'visibility: hidden' : ''}">
+                    Price
+                    <span class="keyboard-shortcut">
+                        <i class="fa fa-keyboard"/>
+                        (P)
+                    </span>
+                </button>
+                <button class="input-button numpad-minus" >+/-</button>
+                <button class="input-button number-char">0</button>
+                <button class="input-button number-char">.</button>
+                <button class="input-button numpad-backspace" title="Keyboard Event: delete" t-attf-style="#{!widget.pos.config.allow_remove_line ? 'visibility: hidden' : ''}">
+                    <i class="material-icons">backspace</i>
+                    <span class="keyboard-shortcut"><i class="fa fa-keyboard"/>(Del)</span>
+                </button>
+            </div>
+        </t>
+    </t>
+
+    <t t-extend="PaymentScreen-Numpad">
+        <t t-jquery="button[class*='numpad-backspace']" t-operation="after">
+            <button class="input-button number-char" data-action='-'>-</button>
+        </t>
+    </t>
+
+</templates>

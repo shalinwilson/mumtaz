@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+
+        <record id="view_restaurant_table_form" model="ir.ui.view">
+            <field name="name">Restaurant Table</field>
+            <field name="model">restaurant.table</field>
+            <field name="inherit_id" ref="pos_restaurant.view_restaurant_table_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@groups='base.group_no_one']" position="attributes">
+                    <attribue name="groups">point_of_sale.group_pos_manager</attribue>
+                </xpath>
+            </field>
+        </record>
+
+        <menuitem id="pos_restaurant.menu_restaurant_floor_all"
+             parent="point_of_sale.menu_point_config_product"
+             action="pos_restaurant.action_restaurant_floor_form"
+             sequence="10"
+             groups="point_of_sale.group_pos_manager"/>
+
+        <menuitem id="pos_restaurant.menu_restaurant_printer_all"
+             parent="point_of_sale.menu_point_config_product"
+             action="pos_restaurant.action_restaurant_printer_form"
+             sequence="15"
+             groups="point_of_sale.group_pos_manager"/>
+
+    </data>
+</odoo>

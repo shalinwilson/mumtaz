@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="assets_backend" name="pos_retail assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/pos_retail/static/src/core/Bus.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/CoreBus.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/database/PosBackEnd.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/database/WebBasicModel.js"/>
+        </xpath>
+    </template>
+
+    <template id="assets_common" name="pos_retail asset_report" inherit_id="web.report_assets_common">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jquery-barcode-last.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jquery.validate.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/bootstrap-notify.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/bootstrap-datetimepicker.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jquery.validate.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jquery.license.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/sweetalert2.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jquery.datatables.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/hotkeys.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jSignature.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jSignature.min.noconflict.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jquery-ui.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/scanner/quagga.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/semantic/semantic.js"/>
+        </xpath>
+    </template>
+
+    <template id="assets_index" name="index pos ui" inherit_id="point_of_sale.index">
+        <xpath expr="//head" position="inside">
+            <link rel="stylesheet" href="/pos_retail/static/src/libs/css/material-dashboard.css"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/libs/css/jquery-ui.css"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jquery-barcode-last.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jquery.validate.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/bootstrap-notify.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/bootstrap-datetimepicker.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jquery.validate.min.js"/>
+             <script type="text/javascript" src="/pos_retail/static/src/libs/js/jquery.license.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/sweetalert2.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jquery.datatables.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/hotkeys.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jSignature.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jSignature.min.noconflict.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/js/jquery-ui.min.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/scanner/quagga.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/libs/semantic/semantic.js"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/libs/semantic/semantic.css"/>
+        </xpath>
+    </template>
+
+    <template id="assets_pos" name="pos_retail assets" inherit_id="point_of_sale.assets">
+        <xpath expr="." position="inside">
+            <!-- core -->
+            <script type="text/javascript" src="/pos_retail/static/src/core/BarcodeReader.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/BigData.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/Chrome.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/CopyRight.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/Database.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/Gui.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/Launchpad.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/LoadModels.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/Models.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/Order.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/PosBaseWidget.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/Printer.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/Rpc.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/SyncBetweenSession.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/SyncStockToPosFromStockQuant.js"/>
+            <!-- Database -->
+            <script type="text/javascript" src="/pos_retail/static/src/database/IndexedDb.js"/>
+            <!-- Screens-->
+            <script type="text/javascript" src="/pos_retail/static/src/screens/ActionpadWidget.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/BookingOrder.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/Client.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/Core.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/Invoice.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/Medical.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/OrderWidget.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/Payment.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/PosOrder.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/PosUi.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/Product.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/ProductCategory.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/ProductOperation.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/ProductReturn.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/Receipt.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/ReviewReceipt.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/TicketsScreen.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/screens/Voucher.js"/>
+            <!-- Shop -->
+            <script type="text/javascript" src="/pos_retail/static/src/shop/BackUpOrders.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/Base.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/Buttons.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/CameraScanBarcode.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/CashManagement.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/CustomerFacingScreen.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/DarkMode.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/DiscountWidget.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/Example.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/HidePosBranding.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/KeyboardGuide.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/LockSession.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/Loyalty.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/MultiLocation.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/MultiLot.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/MultiPriceListCurrency.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/MultiUnitWidget.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/NewsWidget.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/PaymentMethodWidget.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/PollingVerify.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/PriceListWidget.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/Promotion.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/RemoteSessions.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/RemoveOrdersBlankWidget.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/Report.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/ReviewReceiptBeforePaid.js"/>
+            <!--            <script type="text/javascript" src="/pos_retail/static/src/shop/RoundingOrder.js"/>-->
+            <script type="text/javascript" src="/pos_retail/static/src/shop/SaleExtra.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/ServiceCharge.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/shop/ShopLogo.js"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/Primary.scss"/>
+            <!-- Mobile -->
+<!--            <script type="text/javascript" src="/pos_retail/static/src/mobiles/swiper/js/swiper.js"/>-->
+<!--            <link rel="stylesheet" href="/pos_retail/static/src/mobiles/swiper/css/swiper.css"/>-->
+            <!-- CSS POS -->
+            <link rel="stylesheet" href="/pos_retail/static/src/libs/fontawesome/css/font-awesome.css"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/CashManagement.scss"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/Core.scss"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/DarkMode.scss"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/fontawesome.css"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/Fonts.css"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/Launchpad.scss"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/Loyalty.scss"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/MultiLots.scss"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/OrderReceipt.scss"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/PosUi.scss"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/Ribbon.scss"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/SyncBetweenSession.scss"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/SaleExtra.scss"/>
+            <!-- restaurant -->
+            <script type="text/javascript" src="/pos_retail/static/src/restaurant/Restaurant.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/restaurant/CombineTable.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/restaurant/SplitTable.js"/>
+            <!-- PopUp -->
+            <script type="text/javascript" src="/pos_retail/static/src/popUp/PopUp.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/popUp/PopUpDynamicCombo.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/popUp/PopUpModifierBundlePack.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/popUp/PopUpSelectionExtend.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/popUp/PopupSelectionMultiQuantity.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/popUp/PopUpSelectProductAttributes.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/popUp/PopUpsExtend.js"/>
+
+            <!-- Chat -->
+            <script type="text/javascript" src="/mail/static/src/js/services/mail_service.js"/>
+            <script type="text/javascript" src="/pos_retail/static/src/core/Chat.js"/>
+            <link rel="stylesheet" href="/pos_retail/static/src/css/Chat.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/pos_retail/static/src/css/ImportBootrap.scss"/>
+            <t t-call="web._assets_utils"/>
+            <t t-call="web._assets_primary_variables"/>
+            <t t-call="web._assets_secondary_variables"/>
+            <link rel="stylesheet" type="text/scss" href="/web/static/lib/bootstrap/scss/_variables.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/web/static/src/scss/ui.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/mail/static/src/scss/variables.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/mail/static/src/scss/systray.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/mail/static/src/scss/discuss.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/mail/static/src/scss/abstract_thread_window.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/web/static/src/scss/attachment_preview.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/mail/static/src/scss/composer.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/mail/static/src/scss/thread.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/mail/static/src/scss/thread_window.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/web/static/src/scss/dropdown.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/web/static/src/scss/dropdown_extra.scss"/>
+        </xpath>
+    </template>
+
+</odoo>

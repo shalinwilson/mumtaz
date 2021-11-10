@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="ButtonSetPickingTypeOrder">
+        <div class="launchpad-app-container">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/warehouse.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    Operation Type:
+                    <t t-esc="widget.get_order_operation_type().name"/>
+                </div>
+            </a>
+        </div>
+    </t>
+
+    <t t-name="ButtonUpdateStockOnHand">
+        <div class="launchpad-app-container highlight">
+            <a>
+                <div class="launchpad-app-icon">
+                    <img src="/pos_retail/static/src/icons/warehouse.png" width="100%"/>
+                </div>
+                <div class="launchpad-app-label">
+                    <t t-if="!widget.get_active_mode_update_stock()">
+                        Products
+                        <span class="notification"><t t-esc="widget.get_count_products_out_of_stock()"/></span>
+                        Out Of Stock
+                    </t>
+                    <t t-else="">
+                        Finish Update Stock
+                    </t>
+                </div>
+            </a>
+        </div>
+    </t>
+
+</templates>

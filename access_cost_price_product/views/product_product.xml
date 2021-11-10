@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- product.product | tree -->
+    <record id="access_cost_price_product_product_tree_view" model="ir.ui.view">
+        <field name="name">access.product.view.tree</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_product_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='standard_price']" position="attributes">
+                <attribute name="groups">access_cost_price_product.hide_cost_product</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
