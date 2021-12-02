@@ -9,6 +9,7 @@
     'depends': ['account'],
     'data': [
         'views/tax_payment_adjustment.xml',
+        'views/inv_bill_format.xml',
         'reports/vat_report_wizard.xml',
         'views/account.xml',
         'views/account_tax.xml',
