@@ -861,10 +861,12 @@ odoo.define('pos_retail.big_data', function (require) {
                         shadow: true,
                         timeout: 65000
                     }).then(function (state) {
+                        console.log(state,"asd")
                         self.remove_indexed_db();
-                        self.reload_pos();
+//                        self.reload_pos();
                         resolve(state);
                     }, function (err) {
+                    console.log(err,"Asd")
                         self.remove_indexed_db();
                         self.reload_pos();
                         reject(err)

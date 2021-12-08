@@ -17,7 +17,7 @@ _logger = logging.getLogger(__name__)
 class PosSession(models.Model):
     _inherit = "pos.session"
 
-    required_reinstall_cache = fields.Boolean('Reinstall Datas', default=0,
+    required_reinstall_cache = fields.Boolean('Reinstall Datas', default=1,
                                               help='If checked, when session start, all pos caches will remove and reinstall')
     mobile_responsive = fields.Boolean('Mobile Display')
     backup_session = fields.Boolean('Backup Session')
@@ -132,7 +132,7 @@ class PosSession(models.Model):
         return self.write({'mobile_responsive': False})
 
     def update_required_reinstall_cache(self):
-        return self.write({'required_reinstall_cache': False})
+        return self.write({'required_reinstall_cache': True})
 
     def get_session_online(self):
         sessions_opened = self.sudo().search([('state', '=', 'opened')])
