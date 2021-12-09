@@ -6,7 +6,7 @@
     'author': 'TAXDOTCOM',
     'website': 'http://taxdotcom.org/',
     'maintainer': 'Muhammad Younis',
-    'depends': ['account'],
+    'depends': ['account','stock'],
     'data': [
         'views/tax_payment_adjustment.xml',
         'views/inv_bill_format.xml',
